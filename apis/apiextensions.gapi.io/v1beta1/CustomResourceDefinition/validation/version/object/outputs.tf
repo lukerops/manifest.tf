@@ -65,7 +65,7 @@ output "property" {
     )
   }
 
-  depends_on = [ 
+  depends_on = [
     module.strint,
   ]
 }

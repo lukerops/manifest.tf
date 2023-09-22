@@ -1,6 +1,6 @@
 locals {
   error_messages = {
-    items_not_set = <<-EOT
+    items_not_set   = <<-EOT
       Invalid property options for CustomResourceDefinition "%s"!
       At least 1 item is needed for property of type "array".
       (property: %s; version: %s; kind: %s; file: %s)
@@ -29,7 +29,7 @@ locals {
 }
 
 module "strint" {
-  source = "../strint/"
+  source   = "../strint/"
   for_each = local.strint_items
 
   file          = var.file
@@ -44,7 +44,7 @@ module "strint" {
 }
 
 module "object" {
-  source = "../object/"
+  source   = "../object/"
   for_each = local.object_items
 
   file          = var.file
@@ -85,7 +85,7 @@ output "property" {
     )
   }
 
-  depends_on = [ 
+  depends_on = [
     module.strint,
     module.object,
   ]

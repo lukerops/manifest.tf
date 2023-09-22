@@ -16,12 +16,12 @@ locals {
     # is_list
     true = {
       # is_object
-      true = ["string", "integer"]
+      true  = ["string", "integer"]
       false = ["string", "integer", "object"]
     }
     false = {
       # is_object
-      true = ["string", "integer"]
+      true  = ["string", "integer"]
       false = ["string", "integer", "array", "object"]
     }
   }
