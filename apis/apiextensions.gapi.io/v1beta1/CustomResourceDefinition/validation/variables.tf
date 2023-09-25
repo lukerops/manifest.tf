@@ -1,9 +1,7 @@
 variable "manifest" {
   type = object({
     _metadata = object({
-      file           = string
-      apiVersionName = string
-      apiGroup       = string
+      file = string
     })
 
     apiVersion = string
