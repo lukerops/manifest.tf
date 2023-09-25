@@ -2,7 +2,7 @@ locals {
   error_messages = {
     items_not_set   = <<-EOT
       Invalid property options for CustomResourceDefinition "%s"!
-      At least 1 item is needed for property of type "array".
+      The subproperty "items" is needed for property of type "array".
       (property: %s; version: %s; kind: %s; file: %s)
     EOT
     invalid_options = <<-EOT
@@ -17,43 +17,34 @@ locals {
     for option, value in var.property : value == null
     if !contains(local.array_options, option)
   ]
-
-  strint_items = {
-    for index, item in var.property.items : index => item
-    if item.type != "object"
-  }
-  object_items = {
-    for index, item in var.property.items : index => item
-    if item.type == "object"
-  }
 }
 
 module "strint" {
   source   = "../strint/"
-  for_each = local.strint_items
+  count = try(var.property.items.type != "object", false) ? 1 : 0
 
   file          = var.file
   metadata_name = var.metadata_name
   crd_kind      = var.crd_kind
   crd_version   = var.crd_version
 
-  property      = each.value
-  property_path = "${var.property_path}[${each.key}]"
+  property      = var.property.items
+  property_path = "${var.property_path}"
 
   is_list = true
 }
 
 module "object" {
   source   = "../object/"
-  for_each = local.object_items
+  count = try(var.property.items.type == "object", false) ? 1 : 0
 
   file          = var.file
   metadata_name = var.metadata_name
   crd_kind      = var.crd_kind
   crd_version   = var.crd_version
 
-  property      = each.value
-  property_path = "${var.property_path}[${each.key}]"
+  property      = var.property.items
+  property_path = "${var.property_path}"
 }
 
 output "property" {
@@ -74,7 +65,7 @@ output "property" {
   }
 
   precondition {
-    condition = length(var.property.items) > 0
+    condition = can(var.property.items.type)
     error_message = format(
       local.error_messages.items_not_set,
       var.metadata_name,

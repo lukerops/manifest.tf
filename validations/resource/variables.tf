@@ -43,7 +43,7 @@ variable "crds" {
       # array related options
       minItems = optional(number)
       maxItems = optional(number)
-      items = optional(list(object({
+      items = optional(object({
         type         = string
         description  = optional(string)
         externalDocs = optional(string)
@@ -73,7 +73,7 @@ variable "crds" {
           maximum    = optional(number)
           multipleOf = optional(number)
         })))
-      })))
+      }))
       # object related options
       properties = optional(map(object({
         type         = string

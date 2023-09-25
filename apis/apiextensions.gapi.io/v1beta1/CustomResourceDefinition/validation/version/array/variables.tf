@@ -36,7 +36,7 @@ variable "property" {
     # array related options
     minItems = optional(number)
     maxItems = optional(number)
-    items = optional(list(object({
+    items = optional(object({
       type         = string
       description  = optional(string)
       externalDocs = optional(string)
@@ -66,7 +66,7 @@ variable "property" {
         maximum    = optional(number)
         multipleOf = optional(number)
       })))
-    })))
+    }))
     # object related options
     properties = optional(map(object({
       type         = string

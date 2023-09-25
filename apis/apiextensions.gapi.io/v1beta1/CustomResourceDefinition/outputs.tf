@@ -8,7 +8,7 @@ locals {
         apiVersion = join("/", [manifest.spec.group, version.name])
         kind       = manifest.spec.names.kind
         scope      = manifest.spec.scope
-        properties = version.schema.properties
+        properties = version.schema.openAPIV3Schema.properties
       }
       if version.served
     ]

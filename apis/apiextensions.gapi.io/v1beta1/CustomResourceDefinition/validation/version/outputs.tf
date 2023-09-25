@@ -1,8 +1,16 @@
+locals {
+  error_messages = {
+    root_property_is_not_object = <<-EOT
+
+    EOT
+  }
+}
+
 module "strint" {
   source = "./strint/"
 
   for_each = {
-    for property, options in var.crd_version.schema.properties : property => options
+    for property, options in var.crd_version.schema.openAPIV3Schema.properties : property => options
     if !contains(["array", "object"], options.type)
   }
 
@@ -19,7 +27,7 @@ module "array" {
   source = "./array/"
 
   for_each = {
-    for property, options in var.crd_version.schema.properties : property => options
+    for property, options in var.crd_version.schema.openAPIV3Schema.properties : property => options
     if options.type == "array"
   }
 
@@ -36,7 +44,7 @@ module "object" {
   source = "./object/"
 
   for_each = {
-    for property, options in var.crd_version.schema.properties : property => options
+    for property, options in var.crd_version.schema.openAPIV3Schema.properties : property => options
     if options.type == "object"
   }
 
