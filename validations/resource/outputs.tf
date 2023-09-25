@@ -89,12 +89,23 @@ module "array" {
 }
 
 output "manifest" {
-  value = merge(var.manifest, {
+  value = {
+    _metadata = {
+      file = var.manifest._metadata.file
+    }
+
+    apiVersion = var.manifest.apiVersion
+    kind       = var.manifest.kind
+
+    metadata = {
+      name = var.manifest.metadata.name
+    }
+
     spec = {
       for property, value in merge(module.integer, module.string, module.object, module.array) :
       property => value.manifest_value
     }
-  })
+  }
 
   precondition {
     condition = can(var.crds[var.manifest.apiVersion])
