@@ -1,0 +1,16 @@
+apiVersion: iam.cloud.google.com/v1beta1
+kind: User
+metadata:
+  name: lukerops
+spec:
+  email: lukerops@email.com
+---
+apiVersion: iam.cloud.google.com/v1beta1
+kind: Permission
+metadata:
+  name: lukerops
+spec:
+  userRef:
+    name: lukerops
+  roles:
+    - roles/viewer
