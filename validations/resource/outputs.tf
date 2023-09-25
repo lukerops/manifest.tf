@@ -64,8 +64,25 @@ module "integer" {
   manifest_value = try(var.manifest.spec[each.key], null)
 }
 
+module "object" {
+  source   = "./object/"
+  for_each = local.object_properties
+
+  file          = var.manifest._metadata.file
+  metadata_name = var.manifest.metadata.name
+
+  property_path  = each.key
+  property       = each.value
+  manifest_value = try(var.manifest.spec[each.key], null)
+}
+
 output "manifest" {
-  value = var.manifest
+  value = merge(var.manifest, {
+    spec = {
+      for property, value in merge(module.integer, module.string, module.object) :
+      property => value.manifest_value
+    }
+  })
 
   precondition {
     condition = can(var.crds[var.manifest.apiVersion])
