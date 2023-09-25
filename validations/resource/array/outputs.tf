@@ -39,7 +39,7 @@ module "string" {
 }
 
 module "integer" {
-  source   = "../integer/"
+  source = "../integer/"
   count  = try(var.property.items.type == "integer", false) ? try(length(var.manifest_value), 0) : 0
 
   file          = var.file
@@ -51,7 +51,7 @@ module "integer" {
 }
 
 module "object" {
-  source   = "../object/"
+  source = "../object/"
   count  = try(var.property.items.type == "object", false) ? try(length(var.manifest_value), 0) : 0
 
   file          = var.file

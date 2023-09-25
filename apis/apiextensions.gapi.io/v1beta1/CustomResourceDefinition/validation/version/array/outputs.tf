@@ -20,8 +20,8 @@ locals {
 }
 
 module "strint" {
-  source   = "../strint/"
-  count = try(var.property.items.type != "object", false) ? 1 : 0
+  source = "../strint/"
+  count  = try(var.property.items.type != "object", false) ? 1 : 0
 
   file          = var.file
   metadata_name = var.metadata_name
@@ -29,14 +29,14 @@ module "strint" {
   crd_version   = var.crd_version
 
   property      = var.property.items
-  property_path = "${var.property_path}"
+  property_path = var.property_path
 
   is_list = true
 }
 
 module "object" {
-  source   = "../object/"
-  count = try(var.property.items.type == "object", false) ? 1 : 0
+  source = "../object/"
+  count  = try(var.property.items.type == "object", false) ? 1 : 0
 
   file          = var.file
   metadata_name = var.metadata_name
@@ -44,7 +44,7 @@ module "object" {
   crd_version   = var.crd_version
 
   property      = var.property.items
-  property_path = "${var.property_path}"
+  property_path = var.property_path
 }
 
 output "property" {
