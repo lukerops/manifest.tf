@@ -76,10 +76,22 @@ module "object" {
   manifest_value = try(var.manifest.spec[each.key], null)
 }
 
+module "array" {
+  source   = "./array/"
+  for_each = local.array_properties
+
+  file          = var.manifest._metadata.file
+  metadata_name = var.manifest.metadata.name
+
+  property_path  = each.key
+  property       = each.value
+  manifest_value = try(var.manifest.spec[each.key], null)
+}
+
 output "manifest" {
   value = merge(var.manifest, {
     spec = {
-      for property, value in merge(module.integer, module.string, module.object) :
+      for property, value in merge(module.integer, module.string, module.object, module.array) :
       property => value.manifest_value
     }
   })
@@ -115,9 +127,4 @@ output "manifest" {
       var.manifest._metadata.file,
     )
   }
-
-  depends_on = [
-    module.string,
-    module.integer,
-  ]
 }
