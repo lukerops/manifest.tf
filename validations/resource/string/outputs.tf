@@ -10,20 +10,20 @@ locals {
       The maximum length accepted are %v (got %d).
       (metadata.name: %s; property: %s; file: %s)
     EOT
-    required_param = <<-EOT
+    required_param   = <<-EOT
       The property "%s" are required!
       (metadata.name: %s; property: %s; file: %s)
     EOT
   }
 
-  value_is_null = var.manifest_value == null
+  value_is_null      = var.manifest_value == null
   min_length_is_null = var.property.minLength == null
   max_length_is_null = var.property.maxLength == null
 
-  value = local.value_is_null ? "" : var.manifest_value
+  value      = local.value_is_null ? "" : var.manifest_value
   min_lenght = local.value_is_null || local.min_length_is_null ? true : length(local.value) >= var.property.minLength
   max_lenght = local.value_is_null || local.max_length_is_null ? true : length(local.value) <= var.property.maxLength
-  required = var.property.required ? var.manifest_value != null : true
+  required   = var.property.required ? var.manifest_value != null : true
 }
 
 output "manifest_value" {
