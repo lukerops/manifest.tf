@@ -4,7 +4,7 @@ locals {
       The file are not an valid YAML.
       (path: "%s")
     EOT
-    field_not_found = <<-EOT
+    field_not_found    = <<-EOT
       Invalid manifest!
       The "%s" field are required.
       (path: "%s")
