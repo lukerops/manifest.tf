@@ -27,17 +27,17 @@ locals {
   specSchema_type    = try(var.schema_version.specSchema.type, "object")
 
   properties      = try(var.schema_version.specSchema.properties, {})
-  properties_size = try(length(keys(local.properties)), 1)
+  properties_size = try(length(keys(var.schema_version.specSchema.properties)), 1)
 }
 
 module "property" {
-  source   = "./property/"
-  for_each = can(tomap(local.properties)) ? local.properties : {}
+  source = "./property/"
+  for_each = toset(try(keys(local.properties), []))
 
   path     = var.path
   name     = var.name
   property = "spec.versions[${var.index}].specSchema.properties.${each.key}"
-  options  = each.value
+  options  = local.properties[each.key]
 }
 
 output "schema_version" {
@@ -106,7 +106,7 @@ output "schema_version" {
   }
 
   precondition {
-    condition = can(tomap(local.properties))
+    condition = can(keys(local.properties))
     error_message = format(
       local.error_messages.wrong_specSchema_properties_field_type,
       var.index,
