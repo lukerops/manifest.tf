@@ -12,7 +12,7 @@ locals {
     EOT
   }
 
-  valid_types = ["string", "integer", "array", "object"]
+  valid_types = ["string", "integer", "array", "object", "bool"]
   type        = try(var.options.type, "empty")
 
   common_options = {
@@ -22,6 +22,7 @@ locals {
   options = flatten([
     module.string[*].options,
     module.integer[*].options,
+    module.bool[*].options,
   ])
 }
 
@@ -38,6 +39,16 @@ module "string" {
 module "integer" {
   source = "./integer/"
   count  = local.type == "integer" ? 1 : 0
+
+  path     = var.path
+  name     = var.name
+  property = var.property
+  options  = var.options
+}
+
+module "bool" {
+  source = "./bool/"
+  count  = local.type == "bool" ? 1 : 0
 
   path     = var.path
   name     = var.name
