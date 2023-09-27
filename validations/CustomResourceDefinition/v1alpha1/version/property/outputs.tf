@@ -13,14 +13,29 @@ locals {
   }
 
   valid_types = ["string", "integer", "array", "object"]
-  type        = try(var.options.type, "string")
+  type        = try(var.options.type, "empty")
+
+  common_options = {
+    description  = try(var.options.description, null)
+    externalDocs = try(var.options.externalDocs, null)
+  }
+  options = flatten([
+    module.string[*].options,
+  ])
+}
+
+module "string" {
+  source = "./string/"
+  count  = local.type == "string" ? 1 : 0
+
+  path     = var.path
+  name     = var.name
+  property = var.property
+  options  = var.options
 }
 
 output "options" {
-  value = merge({
-    description  = try(var.options.description, null)
-    externalDocs = try(var.options.externalDocs, null)
-  })
+  value = merge(local.common_options, local.options...)
 
   precondition {
     condition = can(var.options.type)
@@ -34,7 +49,7 @@ output "options" {
   }
 
   precondition {
-    condition = contains(local.valid_types, local.type)
+    condition = try(contains(local.valid_types, var.options.type), true)
     error_message = format(
       local.error_messages.invalid_property_type,
       var.property,
