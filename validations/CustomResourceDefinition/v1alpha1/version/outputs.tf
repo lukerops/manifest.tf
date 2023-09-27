@@ -31,7 +31,7 @@ locals {
 }
 
 module "property" {
-  source = "./property/"
+  source   = "./property/"
   for_each = toset(try(keys(local.properties), []))
 
   path     = var.path

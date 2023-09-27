@@ -1,6 +1,6 @@
 locals {
   error_messages = {
-    field_not_found                        = <<-EOT
+    field_not_found             = <<-EOT
       Invalid "version" for CustomResourceDefinition!
       The property "%s.%s" are required.
       (metadata.name: "%s"; path: "%s")
@@ -33,7 +33,7 @@ module "property" {
 
 output "options" {
   value = {
-    type      = "object"
+    type = "object"
     properties = {
       for property, result in module.property : property => result.options
     }
