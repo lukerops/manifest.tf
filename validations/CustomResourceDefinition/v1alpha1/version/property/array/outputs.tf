@@ -7,13 +7,13 @@ locals {
     EOT
     invalid_property_type = <<-EOT
       Invalid "version" for CustomResourceDefinition!
-      The type for the property "%s" must be one of %#v (got "%s").
+      The type for the property "%s.items.type" must be one of %#v (got "%s").
       (metadata.name: "%s"; path: "%s")
     EOT
   }
 
-  valid_types = ["string", "integer", "array", "object", "bool"]
-  type        = try(var.options.type, "empty")
+  valid_types = ["string", "integer", "object", "bool"]
+  type        = try(var.options.items.type, "empty")
 
   common_options = {
     description  = try(var.options.description, null)
@@ -24,76 +24,81 @@ locals {
     module.integer[*].options,
     module.bool[*].options,
     module.object[*].options,
-    module.array[*].options,
   ])
 }
 
 module "string" {
-  source = "./string/"
+  source = "../string/"
   count  = local.type == "string" ? 1 : 0
 
   path     = var.path
   name     = var.name
-  property = var.property
-  options  = var.options
+  property = "${var.property}.items"
+  options  = try(var.options.items, {})
 }
 
 module "integer" {
-  source = "./integer/"
+  source = "../integer/"
   count  = local.type == "integer" ? 1 : 0
 
   path     = var.path
   name     = var.name
-  property = var.property
-  options  = var.options
+  property = "${var.property}.items"
+  options  = try(var.options.items, {})
 }
 
 module "bool" {
-  source = "./bool/"
+  source = "../bool/"
   count  = local.type == "bool" ? 1 : 0
 
   path     = var.path
   name     = var.name
-  property = var.property
-  options  = var.options
+  property = "${var.property}.items"
+  options  = try(var.options.items, {})
 }
 
 module "object" {
-  source = "./object/"
+  source = "../object/"
   count  = local.type == "object" ? 1 : 0
 
   path     = var.path
   name     = var.name
-  property = var.property
-  options  = var.options
-}
-
-module "array" {
-  source = "./array/"
-  count  = local.type == "array" ? 1 : 0
-
-  path     = var.path
-  name     = var.name
-  property = var.property
-  options  = var.options
+  property = "${var.property}.items"
+  options  = try(var.options.items, {})
 }
 
 output "options" {
-  value = merge(local.common_options, local.options...)
+  value = {
+    type     = "array"
+    minItems = try(tonumber(var.options.minItems), null)
+    maxItems = try(tonumber(var.options.maxItems), null)
+    items    = merge(local.common_options, local.options...)
+  }
 
   precondition {
-    condition = can(var.options.type)
+    condition = can(var.options.items)
     error_message = format(
       local.error_messages.field_not_found,
       var.property,
-      "type",
+      "items",
       var.name,
       var.path,
     )
   }
 
   precondition {
-    condition = try(contains(local.valid_types, var.options.type), true)
+    condition = can(var.options.items.type)
+    error_message = format(
+      local.error_messages.field_not_found,
+      var.property,
+      "items.type",
+      var.name,
+      var.path,
+    )
+  }
+
+  precondition {
+    condition = try(contains(local.valid_types, var.options.items.type), true)
     error_message = format(
       local.error_messages.invalid_property_type,
       var.property,
