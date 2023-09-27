@@ -21,12 +21,23 @@ locals {
   }
   options = flatten([
     module.string[*].options,
+    module.integer[*].options,
   ])
 }
 
 module "string" {
   source = "./string/"
   count  = local.type == "string" ? 1 : 0
+
+  path     = var.path
+  name     = var.name
+  property = var.property
+  options  = var.options
+}
+
+module "integer" {
+  source = "./integer/"
+  count  = local.type == "integer" ? 1 : 0
 
   path     = var.path
   name     = var.name
