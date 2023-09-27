@@ -30,8 +30,27 @@ locals {
   kind_first_letter = try(substr(var.manifest.spec.kind, 0, 1), "")
 }
 
+module "version" {
+  source = "./version/"
+  count  = try(length(var.manifest.spec.versions), 0)
+
+  path           = var.manifest.path
+  name           = try(var.manifest.metadata.name, null)
+  index          = count.index
+  schema_version = var.manifest.spec.versions[count.index]
+}
+
 output "schemas" {
-  value = {}
+  value = [
+    for version in module.version[*].schema_version : {
+      path       = var.manifest.path
+      apiVersion = try("${var.manifest.spec.group}/${version.name}", null)
+      kind       = try(var.manifest.spec.kind, null)
+      enabled    = version.enabled
+      deprecated = version.deprecated
+      specSchema = version.specSchema
+    }
+  ]
 
   precondition {
     condition = can(var.manifest.spec.group)
