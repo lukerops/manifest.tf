@@ -1,23 +1,23 @@
 locals {
   error_messages = {
-    field_not_found            = <<-EOT
+    field_not_found                        = <<-EOT
       Invalid "version" for CustomResourceDefinition!
-      The property "versions[%d].%s" are required.
+      The property "spec.versions[%d].%s" are required.
       (metadata.name: "%s"; path: "%s")
     EOT
-    wrong_specSchema_root_type = <<-EOT
+    wrong_specSchema_root_type             = <<-EOT
       Invalid "version" for CustomResourceDefinition!
-      The type for "versions[%d].specSchema.type" must be "object" (got "%s").
+      The type for "spec.versions[%d].specSchema.type" must be "object" (got "%s").
       (metadata.name: "%s"; path: "%s")
     EOT
     wrong_specSchema_properties_field_type = <<-EOT
       Invalid "version" for CustomResourceDefinition!
-      The field "versions[%d].specSchema.properties" must be an object.
+      The field "spec.versions[%d].specSchema.properties" must be an object.
       (metadata.name: "%s"; path: "%s")
     EOT
-    empty_specSchema_properties = <<-EOT
+    empty_specSchema_properties            = <<-EOT
       Invalid "version" for CustomResourceDefinition!
-      The field "versions[%d].specSchema.properties" must have at least one element.
+      The field "spec.versions[%d].specSchema.properties" must have at least one element.
       (metadata.name: "%s"; path: "%s")
     EOT
   }
@@ -26,8 +26,18 @@ locals {
   version_deprecated = try(var.schema_version.deprecated, false)
   specSchema_type    = try(var.schema_version.specSchema.type, "object")
 
-  properties = try(var.schema_version.specSchema.properties, {})
+  properties      = try(var.schema_version.specSchema.properties, {})
   properties_size = try(length(keys(local.properties)), 1)
+}
+
+module "property" {
+  source   = "./property/"
+  for_each = can(tomap(local.properties)) ? local.properties : {}
+
+  path     = var.path
+  name     = var.name
+  property = "spec.versions[${var.index}].specSchema.properties.${each.key}"
+  options  = each.value
 }
 
 output "schema_version" {
@@ -35,7 +45,9 @@ output "schema_version" {
     name       = try(var.schema_version.name, null)
     enabled    = local.version_enabled
     deprecated = local.version_deprecated
-    specSchema = {}
+    specSchema = {
+      for property, result in module.property : property => result.options
+    }
   }
 
   precondition {
