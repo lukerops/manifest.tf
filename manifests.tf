@@ -1,10 +1,11 @@
 locals {
   yamls = flatten([
     for path in var.yamls : [
-      for subfile in split("---", file(path)) : {
+      for subfile in split("\n---\n", file(path)) : {
         path = path
         file = subfile
       }
+      if length(subfile) > 0
     ]
   ])
 }
