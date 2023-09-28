@@ -20,9 +20,21 @@ module "integer" {
   value    = var.value
 }
 
+module "bool" {
+  source = "./bool/"
+  count  = var.schema.type == "bool" ? 1 : 0
+
+  path     = var.path
+  name     = var.name
+  property = var.property
+  schema   = var.schema
+  value    = var.value
+}
+
 output "value" {
   value = coalesce(concat(
     module.string[*].value,
     module.integer[*].value,
+    module.bool[*].value,
   )...)
 }
