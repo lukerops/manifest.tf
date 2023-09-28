@@ -61,6 +61,17 @@ locals {
   extra_properties = setsubtract(keys(var.manifest.spec), keys(local.crd.specSchema))
 }
 
+module "property" {
+  source   = "./property/"
+  for_each = toset(keys(local.crd.specSchema))
+
+  path     = var.manifest.path
+  name     = var.manifest.metadata.name
+  property = "spec.${each.key}"
+  schema   = local.crd.specSchema[each.key]
+  value    = try(var.manifest.spec[each.key], null)
+}
+
 check "deprecated_version" {
   assert {
     condition = !local.crd.enabled || !local.crd.deprecated
@@ -83,7 +94,9 @@ output "instance" {
     metadata = {
       name = var.manifest.metadata.name
     }
-    spec = {}
+    spec = {
+      for property, result in module.property : property => result.value
+    }
   }
 
   precondition {
