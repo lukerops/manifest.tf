@@ -1,5 +1,5 @@
 module "string" {
-  source = "./string/"
+  source = "../../string/"
   count  = var.schema.type == "string" ? 1 : 0
 
   path     = var.path
@@ -10,7 +10,7 @@ module "string" {
 }
 
 module "integer" {
-  source = "./integer/"
+  source = "../../integer/"
   count  = var.schema.type == "integer" ? 1 : 0
 
   path     = var.path
@@ -21,19 +21,8 @@ module "integer" {
 }
 
 module "bool" {
-  source = "./bool/"
+  source = "../../bool/"
   count  = var.schema.type == "bool" ? 1 : 0
-
-  path     = var.path
-  name     = var.name
-  property = var.property
-  schema   = var.schema
-  value    = var.value
-}
-
-module "object" {
-  source = "./object/"
-  count  = var.schema.type == "object" ? 1 : 0
 
   path     = var.path
   name     = var.name
@@ -47,6 +36,5 @@ output "value" {
     module.string[*].value,
     module.integer[*].value,
     module.bool[*].value,
-    module.object[*].value,
   )...)
 }
