@@ -6,7 +6,7 @@ locals {
 }
 
 module "resources" {
-  source = "./validations/resource/"
+  source = "./modules/resource/"
   count  = length(local.resource_manifests)
 
   manifest = local.resource_manifests[count.index]

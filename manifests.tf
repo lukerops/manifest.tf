@@ -11,7 +11,7 @@ locals {
 }
 
 module "manifests" {
-  source = "./validations/manifest/"
+  source = "./modules/manifest/"
   count  = length(local.yamls)
 
   path     = local.yamls[count.index].path
