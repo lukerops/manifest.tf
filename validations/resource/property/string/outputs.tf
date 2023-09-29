@@ -24,7 +24,7 @@ locals {
 }
 
 output "value" {
-  value = var.value
+  value = tostring(var.value)
 
   precondition {
     condition = var.value != null

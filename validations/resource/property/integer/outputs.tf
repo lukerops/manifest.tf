@@ -24,7 +24,7 @@ locals {
 }
 
 output "value" {
-  value = var.value
+  value = tonumber(var.value)
 
   precondition {
     condition = var.value != null

@@ -14,7 +14,7 @@ locals {
 }
 
 output "value" {
-  value = var.value
+  value = tobool(var.value)
 
   precondition {
     condition = var.value != null
