@@ -1,6 +1,6 @@
 locals {
   error_messages = {
-    null_value   = <<-EOT
+    null_value      = <<-EOT
       Invalid resource manifest!
       The property "%s" can not be null.
       (metadata.name: "%s"; path: "%s")

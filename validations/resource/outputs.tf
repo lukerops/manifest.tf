@@ -91,6 +91,7 @@ output "instance" {
     apiGroup       = try(split("/", var.manifest.apiVersion)[0], "error")
     apiVersionName = try(split("/", var.manifest.apiVersion)[1], "error")
     apiVersion     = var.manifest.apiVersion
+    kind           = var.manifest.kind
     metadata = {
       name = var.manifest.metadata.name
     }
