@@ -1,0 +1,33 @@
+
+name: Pull Request
+
+on:
+  pull_request:
+
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  unittests:
+    name: Terraform v${{matrix.terraform_version}}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        terraform_version: ['1.6.6', '1.7.2']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{matrix.terraform_version}}
+
+      - name: Terraform init (v${{matrix.terraform_version}})
+        run: |
+          terraform init
+
+      - name: Run Tests
+        run: |
+          terraform test
