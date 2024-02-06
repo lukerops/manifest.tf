@@ -104,15 +104,6 @@ output "schemas" {
   }
 
   precondition {
-    condition = can(tolist(var.manifest.spec.versions))
-    error_message = format(
-      local.error_messages.versions_field_is_not_a_list,
-      var.manifest.metadata.name,
-      var.manifest.path,
-    )
-  }
-
-  precondition {
     condition = try(
       length(var.manifest.spec.versions) > 0,
       true,
