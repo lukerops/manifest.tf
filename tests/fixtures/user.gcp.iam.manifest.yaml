@@ -1,0 +1,31 @@
+apiVersion: gcp.iam/v1alpha1
+kind: User
+metadata:
+  name: user-teste
+spec:
+  name: Usuário Teste
+  email: user-teste@server.com
+  active: true
+  points:
+    - 1
+    - 2
+  meta:
+    name: "Meta Name 1"
+    number: 42
+    boolean: false
+---
+apiVersion: gcp.iam/v1alpha1
+kind: User
+metadata:
+  name: user-teste-2
+spec:
+  name: Usuário Teste 2
+  email: user-teste-2@server.com
+  active: false
+  points:
+    - 3
+    - 4
+  meta:
+    name: "Meta Name 2"
+    number: 39
+    boolean: true

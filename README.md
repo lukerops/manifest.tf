@@ -33,3 +33,21 @@ module "tf-gapi" {
 #### Exemplos
 
 Os exemplos podem ser encontrados na [pasta de exemplos](examples/)
+
+# Guia de desenvolvimentos
+
+O projeto é desenvolvido usando o [framework de teste](https://developer.hashicorp.com/terraform/language/tests) do próprio terraform.
+
+## Rodando os testes
+
+Para rodar os testes você precisará usar o terrform 1.6+. Primeiro precisa inicializar o proejto terraform, com:
+
+```
+terraform init
+```
+
+Os testes estão em `test/` e podem ser rodados com:
+
+```
+terraform test
+```
