@@ -1,0 +1,48 @@
+apiVersion: tf-gapi.lukerops.com/v1alpha1
+kind: CustomResourceDefinition
+metadata:
+    name: user.gcp.iam
+spec:
+  group: gcp.iam
+  kind: User
+  versions:
+    - name: v1alpha1
+      specSchema:
+        type: object
+        properties:
+          namme:
+            type: string
+          active:
+            type: bool
+          extra:
+            type: array
+            items:
+              type: integer
+    - name: v1alpha2
+      specSchema:
+        type: object
+        properties:
+          myname:
+            type: string
+          other:
+            type: object
+            properties:
+              name:
+                type: string
+              active:
+                type: bool
+    - name: v1alpha3
+      specSchema:
+        type: object
+        properties:
+          name:
+            type: string
+          active:
+            type: bool
+
+    - name: v1alpha4
+      specSchema:
+        type: object
+        properties:
+          othername:
+            type: string
