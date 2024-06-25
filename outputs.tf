@@ -1,5 +1,5 @@
 module "groupResources" {
-  source = "./modules/groupResources/"
+  source = "./groupResources"
 
   resources = module.resources[*].instance
 }
