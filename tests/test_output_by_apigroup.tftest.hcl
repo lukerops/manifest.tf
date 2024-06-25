@@ -1,4 +1,3 @@
-
 run "valida_output_por_apigroup" {
   command = plan
   variables {
@@ -17,6 +16,4 @@ run "valida_output_por_apigroup" {
     condition     = length(keys(module.groupResources.groupedResources)) == 1
     error_message = "Deveria haver apenas um apigroup: gcp.iam"
   }
-
 }
-
