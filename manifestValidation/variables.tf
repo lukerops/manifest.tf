@@ -2,6 +2,6 @@ variable "path" {
   type = string
 }
 
-variable "manifest" {
+variable "text" {
   type = string
 }
