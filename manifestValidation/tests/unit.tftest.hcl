@@ -16,7 +16,7 @@ run "missing_apiVersion" {
 
   variables {
     path = "."
-    text = yamlencode({})
+    text = "{}"
   }
 
   expect_failures = [
@@ -29,9 +29,9 @@ run "invalid_apiVersion" {
 
   variables {
     path = "."
-    text = yamlencode({
-      apiVersion = "test.group",
-    })
+    text = <<-EOT
+        "apiVersion": "test.group"
+    EOT
   }
 
   expect_failures = [
@@ -44,9 +44,9 @@ run "missing_kind" {
 
   variables {
     path = "."
-    text = yamlencode({
-      apiVersion = "test.group/v1alpha1",
-    })
+    text = <<-EOT
+        "apiVersion": "test.group/v1alpha1"
+    EOT
   }
 
   expect_failures = [
@@ -59,10 +59,10 @@ run "missing_metadata" {
 
   variables {
     path = "."
-    text = yamlencode({
-      apiVersion = "test.group/v1alpha1",
-      kind       = "Test",
-    })
+    text = <<-EOT
+        "apiVersion": "test.group/v1alpha1"
+        "kind": "Test"
+    EOT
   }
 
   expect_failures = [
@@ -75,11 +75,11 @@ run "missing_metadata_name" {
 
   variables {
     path = "."
-    text = yamlencode({
-      apiVersion = "test.group/v1alpha1",
-      kind       = "Test",
-      metadata   = {},
-    })
+    text = <<-EOT
+        "apiVersion": "test.group/v1alpha1"
+        "kind": "Test"
+        "metadata": {}
+    EOT
   }
 
   expect_failures = [
@@ -92,13 +92,12 @@ run "missing_spec" {
 
   variables {
     path = "."
-    text = yamlencode({
-      apiVersion = "test.group/v1alpha1",
-      kind       = "Test",
-      metadata = {
-        name = "test",
-      },
-    })
+    text = <<-EOT
+        "apiVersion": "test.group/v1alpha1"
+        "kind": "Test"
+        "metadata":
+          "name": "test"
+    EOT
   }
 
   expect_failures = [
@@ -111,16 +110,14 @@ run "with_valid_manifest" {
 
   variables {
     path = "."
-    text = yamlencode({
-      apiVersion = "test.group/v1alpha1",
-      kind       = "Test",
-      metadata = {
-        name = "test",
-      },
-      spec = {
-        test = "test",
-      }
-    })
+    text = <<-EOT
+        "apiVersion": "test.group/v1alpha1"
+        "kind": "Test"
+        "metadata":
+          "name": "test"
+        "spec":
+          "test": "test"
+    EOT
   }
 
   assert {
