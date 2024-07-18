@@ -147,7 +147,7 @@ run "with_properties" {
           }
         }
         arrayProperty = {
-          type    = "reduced_array"
+          type    = "array"
           version = "v0"
           subItem = {
             type    = "string"

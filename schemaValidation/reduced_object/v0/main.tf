@@ -1,53 +1,53 @@
-module "string" {
-  source   = "../../string"
-  for_each = { for k, v in var.schema.subItem : k => v if v.type == "string" }
-
-  metadata_name = var.metadata_name
-  path          = var.path
-  field_path    = "${var.field_path}.${each.key}"
-  manifest      = try(var.manifest[each.key], null)
-  schema        = each.value
-}
-
-module "integer" {
-  source   = "../../integer"
-  for_each = { for k, v in var.schema.subItem : k => v if v.type == "integer" }
-
-  metadata_name = var.metadata_name
-  path          = var.path
-  field_path    = "${var.field_path}.${each.key}"
-  manifest      = try(var.manifest[each.key], null)
-  schema        = each.value
-}
-
-module "bool" {
-  source   = "../../bool"
-  for_each = { for k, v in var.schema.subItem : k => v if v.type == "bool" }
-
-  metadata_name = var.metadata_name
-  path          = var.path
-  field_path    = "${var.field_path}.${each.key}"
-  manifest      = try(var.manifest[each.key], null)
-  schema        = each.value
-}
-
-module "reduced_array" {
-  source   = "../../reduced_array"
-  for_each = { for k, v in var.schema.subItem : k => v if v.type == "reduced_array" }
-
-  metadata_name = var.metadata_name
-  path          = var.path
-  field_path    = "${var.field_path}.${each.key}"
-  manifest      = try(var.manifest[each.key], null)
-  schema        = each.value
-}
-
 locals {
   properties = keys(var.schema.subItem)
   missing_properties = [
     for property in local.properties : property
     if !can(var.manifest[property])
   ]
+}
+
+module "string" {
+  source   = "../../string"
+  for_each = { for k, v in var.schema.subItem : k => v if v.type == "string" && !contains(local.missing_properties, k) }
+
+  metadata_name = var.metadata_name
+  path          = var.path
+  field_path    = "${var.field_path}.${each.key}"
+  manifest      = var.manifest[each.key]
+  schema        = each.value
+}
+
+module "integer" {
+  source   = "../../integer"
+  for_each = { for k, v in var.schema.subItem : k => v if v.type == "integer" && !contains(local.missing_properties, k) }
+
+  metadata_name = var.metadata_name
+  path          = var.path
+  field_path    = "${var.field_path}.${each.key}"
+  manifest      = var.manifest[each.key]
+  schema        = each.value
+}
+
+module "bool" {
+  source   = "../../bool"
+  for_each = { for k, v in var.schema.subItem : k => v if v.type == "bool" && !contains(local.missing_properties, k) }
+
+  metadata_name = var.metadata_name
+  path          = var.path
+  field_path    = "${var.field_path}.${each.key}"
+  manifest      = var.manifest[each.key]
+  schema        = each.value
+}
+
+module "reduced_array" {
+  source   = "../../reduced_array"
+  for_each = { for k, v in var.schema.subItem : k => v if v.type == "reduced_array" && !contains(local.missing_properties, k) }
+
+  metadata_name = var.metadata_name
+  path          = var.path
+  field_path    = "${var.field_path}.${each.key}"
+  manifest      = var.manifest[each.key]
+  schema        = each.value
 }
 
 output "resource" {

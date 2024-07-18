@@ -69,7 +69,7 @@ run "with_invalid_versions" {
       spec = {
         group    = "test.group"
         kind     = "Test"
-        versions = "invalid"
+        versions = 123
       }
     }
   }

@@ -5,7 +5,7 @@ module "version" {
   metadata_name = var.manifest.metadata.name
   path          = var.path
   field_path    = "spec.versions[${count.index}]"
-  manifest      = var.manifest.spec.versions[count.index]
+  manifest      = try(var.manifest.spec.versions[count.index], null)
 }
 
 output "schema" {

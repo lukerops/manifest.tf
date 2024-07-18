@@ -76,7 +76,7 @@ run "duplicated_custom_resource_definition" {
   }
 
   expect_failures = [
-    output.resource,
+    output.instance,
   ]
 }
 
@@ -129,7 +129,7 @@ run "custom_resource_definition_not_found" {
   }
 
   expect_failures = [
-    output.resource,
+    output.instance,
   ]
 }
 
@@ -182,7 +182,7 @@ run "kind_not_found" {
   }
 
   expect_failures = [
-    output.resource,
+    output.instance,
   ]
 }
 
@@ -235,7 +235,7 @@ run "disabled_version" {
   }
 
   expect_failures = [
-    output.resource,
+    output.instance,
   ]
 }
 
@@ -341,7 +341,7 @@ run "success" {
   }
 
   assert {
-    condition = output.resource == {
+    condition = output.instance == {
       path = "."
 
       apiVersionName = "v1alpha1"
