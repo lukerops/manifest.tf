@@ -1,4 +1,3 @@
-
 run "parse_crd_with_multiple_versions" {
   command = plan
 
@@ -9,8 +8,7 @@ run "parse_crd_with_multiple_versions" {
   }
 
   assert {
-    condition     = length(module.custom_resource_definitions_v1alpha1[0].schemas) == 4
+    condition     = length(module.custom_resource_definitions[0].schema.versions) == 4
     error_message = "Não parseou todas as versões do CRD"
   }
-
 }

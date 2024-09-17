@@ -11,9 +11,9 @@ locals {
 }
 
 module "manifests" {
-  source = "./modules/manifest/"
+  source = "./manifestValidation"
   count  = length(local.yamls)
 
-  path     = local.yamls[count.index].path
-  manifest = local.yamls[count.index].file
+  path = local.yamls[count.index].path
+  text = local.yamls[count.index].file
 }

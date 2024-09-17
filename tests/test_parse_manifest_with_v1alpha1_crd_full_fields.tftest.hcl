@@ -24,13 +24,7 @@ run "parse_manifest_crd_v1alpha1_full_fields" {
   }
 
   assert {
-    condition = {
-      name   = module.resources[0].instance.spec.name,
-      email  = module.resources[0].instance.spec.email
-      active = module.resources[0].instance.spec.active
-      points = module.resources[0].instance.spec.points
-      meta   = module.resources[0].instance.spec.meta
-      } == {
+    condition = module.resources[0].instance.spec == {
       email  = "user-teste@server.com"
       name   = "Usuário Teste",
       active = true
@@ -45,13 +39,7 @@ run "parse_manifest_crd_v1alpha1_full_fields" {
   }
 
   assert {
-    condition = {
-      name   = module.resources[1].instance.spec.name,
-      email  = module.resources[1].instance.spec.email
-      active = module.resources[1].instance.spec.active
-      points = module.resources[1].instance.spec.points
-      meta   = module.resources[1].instance.spec.meta
-      } == {
+    condition = module.resources[1].instance.spec == {
       email  = "user-teste-2@server.com"
       name   = "Usuário Teste 2",
       active = false
@@ -64,5 +52,4 @@ run "parse_manifest_crd_v1alpha1_full_fields" {
     }
     error_message = "Não parseou campos do primeiro manifesto"
   }
-
 }
