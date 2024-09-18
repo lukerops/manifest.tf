@@ -1,11 +1,11 @@
 locals {
   internal_manifests = [
     for output in module.manifests[*] : output
-    if strcontains(output.manifest.apiVersion, "tf-gapi.lukerops.com") && output.manifest.kind == "CustomResourceDefinition"
+    if strcontains(output.manifest.apiVersion, "lukerops.com") && output.manifest.kind == "CustomResourceDefinition"
   ]
   resource_manifests = [
     for output in module.manifests[*] : output
-    if !strcontains(output.manifest.apiVersion, "tf-gapi.lukerops.com")
+    if !strcontains(output.manifest.apiVersion, "lukerops.com")
   ]
 }
 
