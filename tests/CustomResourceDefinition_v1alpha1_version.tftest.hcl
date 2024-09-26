@@ -1,5 +1,8 @@
 run "missing_name" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/version/"
+  }
 
   variables {
     metadata_name = "test"
@@ -15,6 +18,9 @@ run "missing_name" {
 
 run "missing_specSchema" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/version/"
+  }
 
   variables {
     metadata_name = "test"
@@ -32,6 +38,9 @@ run "missing_specSchema" {
 
 run "with_specSchema" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/version/"
+  }
 
   variables {
     metadata_name = "test"
