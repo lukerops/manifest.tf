@@ -1,5 +1,8 @@
 run "without_items" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -17,6 +20,9 @@ run "without_items" {
 
 run "without_minItems_and_maxItems_and_with_bool_items" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -51,6 +57,9 @@ run "without_minItems_and_maxItems_and_with_bool_items" {
 
 run "without_minItems_and_maxItems_and_with_string_items" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -89,6 +98,9 @@ run "without_minItems_and_maxItems_and_with_string_items" {
 
 run "without_minItems_and_maxItems_and_with_integer_items" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -127,6 +139,9 @@ run "without_minItems_and_maxItems_and_with_integer_items" {
 
 run "with_minItems" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -162,6 +177,9 @@ run "with_minItems" {
 
 run "with_minLength_and_maxItems" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -198,6 +216,9 @@ run "with_minLength_and_maxItems" {
 
 run "with_invalid_minItems_and_maxItems" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -220,6 +241,9 @@ run "with_invalid_minItems_and_maxItems" {
 
 run "with_string_minItems" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -241,6 +265,9 @@ run "with_string_minItems" {
 
 run "with_string_maxItems" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -262,6 +289,9 @@ run "with_string_maxItems" {
 
 run "with_invalid_minItems_value" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
@@ -283,6 +313,9 @@ run "with_invalid_minItems_value" {
 
 run "with_invalid_maxItems_value" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_array"
+  }
 
   variables {
     metadata_name = "test"
