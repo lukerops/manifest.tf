@@ -1,5 +1,8 @@
 run "missing_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -32,6 +35,9 @@ run "missing_value" {
 
 run "with_invalid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -64,6 +70,9 @@ run "with_invalid_value" {
 
 run "with_wrong_minItems" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -96,6 +105,9 @@ run "with_wrong_minItems" {
 
 run "with_wrong_maxItems" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -128,6 +140,9 @@ run "with_wrong_maxItems" {
 
 run "with_valid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
