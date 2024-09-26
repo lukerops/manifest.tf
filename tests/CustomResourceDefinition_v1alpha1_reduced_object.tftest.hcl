@@ -1,5 +1,8 @@
 run "without_properties" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_object/"
+  }
 
   variables {
     metadata_name = "test"
@@ -17,6 +20,9 @@ run "without_properties" {
 
 run "with_invalid_properties" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_object/"
+  }
 
   variables {
     metadata_name = "test"
@@ -35,6 +41,9 @@ run "with_invalid_properties" {
 
 run "with_properties_missing_type" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_object/"
+  }
 
   variables {
     metadata_name = "test"
@@ -55,6 +64,9 @@ run "with_properties_missing_type" {
 
 run "with_properties_invalid_type" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_object/"
+  }
 
   variables {
     metadata_name = "test"
@@ -77,6 +89,9 @@ run "with_properties_invalid_type" {
 
 run "with_properties" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/reduced_object/"
+  }
 
   variables {
     metadata_name = "test"
