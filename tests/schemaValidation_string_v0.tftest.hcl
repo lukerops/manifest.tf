@@ -1,5 +1,8 @@
 run "missing_value" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -24,6 +27,9 @@ run "missing_value" {
 
 run "with_invalid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -48,6 +54,9 @@ run "with_invalid_value" {
 
 run "with_wrong_minLegnth" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -72,6 +81,9 @@ run "with_wrong_minLegnth" {
 
 run "with_wrong_maxLegnth" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
@@ -97,6 +109,9 @@ run "with_wrong_maxLegnth" {
 
 run "with_valid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
