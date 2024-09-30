@@ -26,16 +26,8 @@ jobs:
 
       - name: Terraform init (v${{matrix.terraform_version}})
         run: |
-          for i in $(find . -name tests -exec dirname {} \;); do
-            echo "Running tests for: \"$i\""
-            terraform -chdir="$i" init
-            echo;
-          done
+          terraform init
 
       - name: Run Tests
         run: |
-          for i in $(find . -name tests -exec dirname {} \;); do
-            echo "Running tests for: \"$i\""
-            terraform -chdir="$i" test
-            echo;
-          done
+          terraform test

@@ -1,5 +1,8 @@
 run "missing_group" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/"
+  }
 
   variables {
     path = "."
@@ -18,6 +21,9 @@ run "missing_group" {
 
 run "missing_kind" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/"
+  }
 
   variables {
     path = "."
@@ -38,6 +44,9 @@ run "missing_kind" {
 
 run "missing_versions" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/"
+  }
 
   variables {
     path = "."
@@ -59,6 +68,9 @@ run "missing_versions" {
 
 run "with_invalid_versions" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/"
+  }
 
   variables {
     path = "."
@@ -82,6 +94,9 @@ run "with_invalid_versions" {
 
 run "with_valid_versions" {
   command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha1/"
+  }
 
   variables {
     path = "."

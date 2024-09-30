@@ -1,12 +1,15 @@
 run "missing_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_object/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
+      type        = "reduced_object"
       version     = "v0"
       validations = {}
       subItem = {
@@ -31,13 +34,16 @@ run "missing_value" {
 
 run "with_invalid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_object/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
+      type        = "reduced_object"
       version     = "v0"
       validations = {}
       subItem = {
@@ -62,13 +68,16 @@ run "with_invalid_value" {
 
 run "with_valid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_object/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
+      type        = "reduced_object"
       version     = "v0"
       validations = {}
       subItem = {
@@ -96,31 +105,12 @@ run "with_valid_value" {
           subItem     = null
           validations = {}
         }
-        reducedObjectProperty = {
-          type        = "reduced_object"
-          version     = "v0"
-          validations = {}
-          subItem = {
-            stringProperty = {
-              type    = "string"
-              version = "v0"
-              subItem = null
-              validations = {
-                minLength = 1
-                maxLength = null
-              }
-            }
-          }
-        }
       }
     }
     manifest = {
       stringProperty  = "test"
       integerProperty = 1
       boolProperty    = true
-      reducedObjectProperty = {
-        stringProperty = "test"
-      }
     }
   }
 
@@ -129,10 +119,7 @@ run "with_valid_value" {
       stringProperty  = "test"
       integerProperty = 1
       boolProperty    = true
-      reducedObjectProperty = {
-        stringProperty = "test"
-      }
     }
-    error_message = "Error when validating object."
+    error_message = "Error when validating reduced_object."
   }
 }

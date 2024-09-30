@@ -1,17 +1,20 @@
 run "missing_value" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "integer"
+      type    = "string"
       version = "v0"
       subItem = null
       validations = {
-        minimum = null
-        maximum = null
+        minLength = null
+        maxLength = null
       }
     }
     manifest = null
@@ -24,18 +27,21 @@ run "missing_value" {
 
 run "with_invalid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "integer"
+      type    = "string"
       version = "v0"
       subItem = null
       validations = {
-        minimum = null
-        maximum = null
+        minLength = null
+        maxLength = null
       }
     }
     manifest = { test = 1 }
@@ -48,21 +54,24 @@ run "with_invalid_value" {
 
 run "with_wrong_minLegnth" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "integer"
+      type    = "string"
       version = "v0"
       subItem = null
       validations = {
-        minimum = 10
-        maximum = null
+        minLength = 10
+        maxLength = null
       }
     }
-    manifest = 5
+    manifest = "test"
   }
 
   expect_failures = [
@@ -72,21 +81,24 @@ run "with_wrong_minLegnth" {
 
 run "with_wrong_maxLegnth" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "integer"
+      type    = "string"
       version = "v0"
       subItem = null
       validations = {
-        minimum = null
-        maximum = 3
+        minLength = null
+        maxLength = 3
       }
     }
-    manifest = 5
+    manifest = "test"
   }
 
   expect_failures = [
@@ -97,25 +109,28 @@ run "with_wrong_maxLegnth" {
 
 run "with_valid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/string/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "integer"
+      type    = "string"
       version = "v0"
       subItem = null
       validations = {
-        minimum = 2
-        maximum = 5
+        minLength = 2
+        maxLength = 5
       }
     }
-    manifest = 5
+    manifest = "test"
   }
 
   assert {
-    condition     = output.resource == 5
-    error_message = "Error when validating integer with minimum and maximum."
+    condition     = output.resource == "test"
+    error_message = "Error when validating string with minLength and maxLength."
   }
 }

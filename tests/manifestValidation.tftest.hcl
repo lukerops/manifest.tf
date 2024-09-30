@@ -1,5 +1,8 @@
 run "with_invalid_yaml" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -13,6 +16,9 @@ run "with_invalid_yaml" {
 
 run "missing_apiVersion" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -26,6 +32,9 @@ run "missing_apiVersion" {
 
 run "invalid_apiVersion" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -41,6 +50,9 @@ run "invalid_apiVersion" {
 
 run "missing_kind" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -56,6 +68,9 @@ run "missing_kind" {
 
 run "missing_metadata" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -72,6 +87,9 @@ run "missing_metadata" {
 
 run "missing_metadata_name" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -89,6 +107,9 @@ run "missing_metadata_name" {
 
 run "missing_spec" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."
@@ -107,6 +128,9 @@ run "missing_spec" {
 
 run "with_valid_manifest" {
   command = plan
+  module {
+    source = "./manifestValidation/"
+  }
 
   variables {
     path = "."

@@ -1,5 +1,8 @@
 run "duplicated_custom_resource_definition" {
   command = plan
+  module {
+    source = "./resourceValidation/"
+  }
 
   variables {
     path = "."
@@ -82,6 +85,9 @@ run "duplicated_custom_resource_definition" {
 
 run "custom_resource_definition_not_found" {
   command = plan
+  module {
+    source = "./resourceValidation/"
+  }
 
   variables {
     path = "."
@@ -135,6 +141,9 @@ run "custom_resource_definition_not_found" {
 
 run "kind_not_found" {
   command = plan
+  module {
+    source = "./resourceValidation/"
+  }
 
   variables {
     path = "."
@@ -188,6 +197,9 @@ run "kind_not_found" {
 
 run "disabled_version" {
   command = plan
+  module {
+    source = "./resourceValidation/"
+  }
 
   variables {
     path = "."
@@ -241,6 +253,9 @@ run "disabled_version" {
 
 run "deprecated_version" {
   command = plan
+  module {
+    source = "./resourceValidation/"
+  }
 
   variables {
     path = "."
@@ -294,6 +309,9 @@ run "deprecated_version" {
 
 run "success" {
   command = plan
+  module {
+    source = "./resourceValidation/"
+  }
 
   variables {
     path = "."

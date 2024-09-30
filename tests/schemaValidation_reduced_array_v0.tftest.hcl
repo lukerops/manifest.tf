@@ -1,12 +1,15 @@
 run "missing_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "array"
+      type    = "reduced_array"
       version = "v0"
       subItem = {
         type    = "string"
@@ -32,13 +35,16 @@ run "missing_value" {
 
 run "with_invalid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "array"
+      type    = "reduced_array"
       version = "v0"
       subItem = {
         type    = "string"
@@ -64,13 +70,16 @@ run "with_invalid_value" {
 
 run "with_wrong_minItems" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "array"
+      type    = "reduced_array"
       version = "v0"
       subItem = {
         type    = "string"
@@ -96,13 +105,16 @@ run "with_wrong_minItems" {
 
 run "with_wrong_maxItems" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "array"
+      type    = "reduced_array"
       version = "v0"
       subItem = {
         type    = "string"
@@ -128,28 +140,24 @@ run "with_wrong_maxItems" {
 
 run "with_valid_value" {
   command = plan
+  module {
+    source = "./schemaValidation/reduced_array/v0/"
+  }
 
   variables {
     metadata_name = "test"
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type    = "array"
+      type    = "reduced_array"
       version = "v0"
       subItem = {
-        type        = "reduced_object"
-        version     = "v0"
-        validations = {}
-        subItem = {
-          integerProperty = {
-            type    = "integer"
-            version = "v0"
-            subItem = null
-            validations = {
-              minimum = 1
-              maximum = null
-            }
-          }
+        type    = "integer"
+        version = "v0"
+        subItem = null
+        validations = {
+          minimum = 1
+          maximum = 5
         }
       }
       validations = {
@@ -157,13 +165,11 @@ run "with_valid_value" {
         maxItems = 2
       }
     }
-    manifest = [{
-      integerProperty = 3
-    }]
+    manifest = [3, 4]
   }
 
   assert {
-    condition     = output.resource == [{ integerProperty = 3 }]
-    error_message = "Error when validating array with minItems and maxItems."
+    condition     = output.resource == [3, 4]
+    error_message = "Error when validating reduced_array with minItems and maxItems."
   }
 }
