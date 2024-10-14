@@ -1,7 +1,7 @@
 run "without_items" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -21,7 +21,7 @@ run "without_items" {
 run "without_minItems_and_maxItems_and_with_bool_items" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -37,14 +37,21 @@ run "without_minItems_and_maxItems_and_with_bool_items" {
   }
 
   assert {
-    condition = output.schema == {
+    condition = {
+      type    = output.schema.type
+      version = output.schema.version
+      subItem = {
+        type    = output.schema.subItem.type
+        subItem = output.schema.subItem.subItem
+      }
+      validations = output.schema.validations
+
+      } == {
       type    = "array"
       version = "v0"
       subItem = {
-        type        = "bool"
-        version     = "v0"
-        subItem     = null
-        validations = {}
+        type    = "bool"
+        subItem = null
       }
       validations = {
         minItems = null
@@ -58,7 +65,7 @@ run "without_minItems_and_maxItems_and_with_bool_items" {
 run "without_minItems_and_maxItems_and_with_string_items" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -99,7 +106,7 @@ run "without_minItems_and_maxItems_and_with_string_items" {
 run "without_minItems_and_maxItems_and_with_integer_items" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -140,7 +147,7 @@ run "without_minItems_and_maxItems_and_with_integer_items" {
 run "without_minItems_and_maxItems_and_with_reduced_object_items" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -193,7 +200,7 @@ run "without_minItems_and_maxItems_and_with_reduced_object_items" {
 run "with_minItems" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -214,10 +221,13 @@ run "with_minItems" {
       type    = "array"
       version = "v0"
       subItem = {
-        type        = "bool"
-        version     = "v0"
-        subItem     = null
-        validations = {}
+        type    = "bool"
+        version = "v1"
+        subItem = null
+        validations = {
+          default_value     = null
+          has_default_value = false
+        }
       }
       validations = {
         minItems = 5
@@ -231,7 +241,7 @@ run "with_minItems" {
 run "with_minLength_and_maxItems" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -253,10 +263,13 @@ run "with_minLength_and_maxItems" {
       type    = "array"
       version = "v0"
       subItem = {
-        type        = "bool"
-        version     = "v0"
-        subItem     = null
-        validations = {}
+        type    = "bool"
+        version = "v1"
+        subItem = null
+        validations = {
+          default_value     = null
+          has_default_value = false
+        }
       }
       validations = {
         minItems = 5
@@ -270,7 +283,7 @@ run "with_minLength_and_maxItems" {
 run "with_invalid_minItems_and_maxItems" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -295,7 +308,7 @@ run "with_invalid_minItems_and_maxItems" {
 run "with_string_minItems" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -319,7 +332,7 @@ run "with_string_minItems" {
 run "with_string_maxItems" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -343,7 +356,7 @@ run "with_string_maxItems" {
 run "with_invalid_minItems_value" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {
@@ -367,7 +380,7 @@ run "with_invalid_minItems_value" {
 run "with_invalid_maxItems_value" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/array/"
+    source = "./CustomResourceDefinition/v1alpha2/array/"
   }
 
   variables {

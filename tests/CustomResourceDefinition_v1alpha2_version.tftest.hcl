@@ -1,7 +1,7 @@
 run "missing_name" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/version/"
+    source = "./CustomResourceDefinition/v1alpha2/version/"
   }
 
   variables {
@@ -19,7 +19,7 @@ run "missing_name" {
 run "missing_specSchema" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/version/"
+    source = "./CustomResourceDefinition/v1alpha2/version/"
   }
 
   variables {
@@ -39,7 +39,7 @@ run "missing_specSchema" {
 run "with_specSchema" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/version/"
+    source = "./CustomResourceDefinition/v1alpha2/version/"
   }
 
   variables {
@@ -66,7 +66,7 @@ run "with_specSchema" {
       deprecated = false
       schema = {
         type        = "root_object"
-        version     = "v0"
+        version     = "v1"
         validations = {}
         subItem = {
           test = {

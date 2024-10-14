@@ -1,7 +1,7 @@
 run "without_minLength_and_maxLength" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -30,7 +30,7 @@ run "without_minLength_and_maxLength" {
 run "with_minLength" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -60,7 +60,7 @@ run "with_minLength" {
 run "with_minLength_and_maxLength" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -91,7 +91,7 @@ run "with_minLength_and_maxLength" {
 run "with_invalid_minLength_and_maxLength" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -113,7 +113,7 @@ run "with_invalid_minLength_and_maxLength" {
 run "with_string_minLength" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -134,7 +134,7 @@ run "with_string_minLength" {
 run "with_string_maxLength" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -155,7 +155,7 @@ run "with_string_maxLength" {
 run "with_invalid_minLength_value" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {
@@ -176,7 +176,7 @@ run "with_invalid_minLength_value" {
 run "with_invalid_maxLength_value" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/string"
+    source = "./CustomResourceDefinition/v1alpha2/string"
   }
 
   variables {

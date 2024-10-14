@@ -1,7 +1,7 @@
 run "without_properties" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/object"
+    source = "./CustomResourceDefinition/v1alpha2/object"
   }
 
   variables {
@@ -21,7 +21,7 @@ run "without_properties" {
 run "with_invalid_properties" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/object"
+    source = "./CustomResourceDefinition/v1alpha2/object"
   }
 
   variables {
@@ -42,7 +42,7 @@ run "with_invalid_properties" {
 run "with_properties_missing_type" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/object"
+    source = "./CustomResourceDefinition/v1alpha2/object"
   }
 
   variables {
@@ -65,7 +65,7 @@ run "with_properties_missing_type" {
 run "with_properties_invalid_type" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/object"
+    source = "./CustomResourceDefinition/v1alpha2/object"
   }
 
   variables {
@@ -90,7 +90,7 @@ run "with_properties_invalid_type" {
 run "with_properties" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/object"
+    source = "./CustomResourceDefinition/v1alpha2/object"
   }
 
   variables {
@@ -138,10 +138,13 @@ run "with_properties" {
       validations = {}
       subItem = {
         boolProperty = {
-          type        = "bool"
-          version     = "v0"
-          subItem     = null
-          validations = {}
+          type    = "bool"
+          version = "v1"
+          subItem = null
+          validations = {
+            default_value     = null
+            has_default_value = false
+          }
         }
         stringProperty = {
           type    = "string"
