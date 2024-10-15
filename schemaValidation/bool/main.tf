@@ -22,7 +22,9 @@ module "v1" {
 
 output "resource" {
   value = one(
-    module.v0[*].resource,
-    module.v1[*].resource,
+    concat(
+      module.v0[*].resource,
+      module.v1[*].resource,
+    )
   )
 }
