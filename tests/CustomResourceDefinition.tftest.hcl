@@ -6,11 +6,30 @@ run "can_parse_crd_v1alpha2" {
 
   variables {
     path = "./tests/fixtures/user.gcp.iam.crd_with_default_value_boolean_v1alpha2.yml"
-    manifest = yamldecode(
-      file(
-        "./tests/fixtures/user.gcp.iam.crd_with_default_value_boolean_v1alpha2.yml"
-      )
-    )
+    manifest = {
+      "apiVersion" = "tf-gapi.lukerops.com/v1alpha2"
+      "kind"       = "CustomResourceDefinition"
+      "metadata" = {
+        "name" = "user.gcp.iam"
+      }
+      "spec" = {
+        "group" = "gcp.iam"
+        "kind"  = "User"
+        "versions" = [
+          {
+            "name" = "v1alpha2"
+            "specSchema" = {
+              "properties" = {
+                "email" = {
+                  "type" = "string"
+                }
+              }
+              "type" = "object"
+            }
+          },
+        ]
+      }
+    }
   }
 
   assert {
