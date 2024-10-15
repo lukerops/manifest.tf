@@ -134,7 +134,7 @@ run "with_properties" {
   assert {
     condition = output.schema == {
       type        = "object"
-      version     = "v0"
+      version     = "v1"
       validations = {}
       subItem = {
         boolProperty = {

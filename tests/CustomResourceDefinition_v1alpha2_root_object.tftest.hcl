@@ -190,7 +190,7 @@ run "with_properties" {
         }
         objectProperty = {
           type        = "object"
-          version     = "v0"
+          version     = "v1"
           validations = {}
           subItem = {
             stringProperty = {

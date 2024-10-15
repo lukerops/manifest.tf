@@ -157,6 +157,57 @@ run "present_boolean_with_default_value_on_root_object" {
 
 }
 
+run "boolean_with_default_value_on_object_inside_root_object" {
+
+  command = plan
+
+  module {
+    source = "./schemaValidation/root_object/v1/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type        = "root_object"
+      version     = "v1"
+      validations = {}
+      subItem = {
+        dados = {
+          type        = "object"
+          version     = "v1"
+          validations = {}
+          subItem = {
+            active = {
+              type    = "bool"
+              version = "v1"
+              subItem = null
+              validations = {
+                default_value     = true
+                has_default_value = true
+              }
+            }
+          }
+        }
+      }
+    }
+    manifest = {
+      dados = {
+        # Está comentado para simular um manifesto sem a presença desse campo
+        #active = null
+      }
+    }
+  }
+
+  assert {
+    condition     = output.resource.dados.active == true
+    error_message = <<-EOT
+    Error: Não preencheu corretamente valor de vampo bool/v1 com default value
+EOT
+  }
+}
+
 
 run "manifest_with_boolean_v1_no_default_value" {
   command = plan

@@ -55,7 +55,7 @@ module "reduced_object" {
 output "schema" {
   value = {
     type        = "object"
-    version     = "v0"
+    version     = "v1"
     validations = {}
     subItem = {
       for key, value in merge(module.string, module.integer, module.bool, module.array, module.reduced_object) : key => value.schema
