@@ -174,7 +174,7 @@ run "without_minItems_and_maxItems_and_with_reduced_object_items" {
       version = "v0"
       subItem = {
         type        = "reduced_object"
-        version     = "v0"
+        version     = "v1"
         validations = {}
         subItem = {
           stringProperty = {

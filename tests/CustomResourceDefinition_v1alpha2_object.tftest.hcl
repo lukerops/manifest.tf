@@ -183,7 +183,7 @@ run "with_properties" {
         }
         objectProperty = {
           type        = "reduced_object"
-          version     = "v0"
+          version     = "v1"
           validations = {}
           subItem = {
             stringProperty = {

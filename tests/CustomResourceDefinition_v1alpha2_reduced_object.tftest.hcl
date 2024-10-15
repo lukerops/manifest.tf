@@ -122,7 +122,7 @@ run "with_properties" {
   assert {
     condition = output.schema == {
       type        = "reduced_object"
-      version     = "v0"
+      version     = "v1"
       validations = {}
       subItem = {
         boolProperty = {

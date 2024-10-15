@@ -1,7 +1,7 @@
 run "missing_value" {
   command = plan
   module {
-    source = "./schemaValidation/object/v1/"
+    source = "./schemaValidation/reduced_object/v1/"
   }
 
   variables {
@@ -9,8 +9,8 @@ run "missing_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
-      version     = "v0"
+      type        = "reduced_object"
+      version     = "v1"
       validations = {}
       subItem = {
         stringProperty = {
@@ -35,7 +35,7 @@ run "missing_value" {
 run "with_invalid_value" {
   command = plan
   module {
-    source = "./schemaValidation/object/v1/"
+    source = "./schemaValidation/reduced_object/v1/"
   }
 
   variables {
@@ -43,8 +43,8 @@ run "with_invalid_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
-      version     = "v0"
+      type        = "reduced_object"
+      version     = "v1"
       validations = {}
       subItem = {
         stringProperty = {
@@ -69,7 +69,7 @@ run "with_invalid_value" {
 run "with_valid_value" {
   command = plan
   module {
-    source = "./schemaValidation/object/v1/"
+    source = "./schemaValidation/reduced_object/v1/"
   }
 
   variables {
@@ -77,8 +77,8 @@ run "with_valid_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
-      version     = "v0"
+      type        = "reduced_object"
+      version     = "v1"
       validations = {}
       subItem = {
         stringProperty = {
@@ -105,31 +105,12 @@ run "with_valid_value" {
           subItem     = null
           validations = {}
         }
-        reducedObjectProperty = {
-          type        = "reduced_object"
-          version     = "v1"
-          validations = {}
-          subItem = {
-            stringProperty = {
-              type    = "string"
-              version = "v0"
-              subItem = null
-              validations = {
-                minLength = 1
-                maxLength = null
-              }
-            }
-          }
-        }
       }
     }
     manifest = {
       stringProperty  = "test"
       integerProperty = 1
       boolProperty    = true
-      reducedObjectProperty = {
-        stringProperty = "test"
-      }
     }
   }
 
@@ -138,20 +119,16 @@ run "with_valid_value" {
       stringProperty  = "test"
       integerProperty = 1
       boolProperty    = true
-      reducedObjectProperty = {
-        stringProperty = "test"
-      }
     }
-    error_message = "Error when validating object."
+    error_message = "Error when validating reduced_object."
   }
 }
-
 
 run "can_have_null_bool_field_with_default_value" {
 
   command = plan
   module {
-    source = "./schemaValidation/object/v1/"
+    source = "./schemaValidation/reduced_object/v1"
   }
 
   variables {
@@ -159,7 +136,7 @@ run "can_have_null_bool_field_with_default_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "object"
+      type        = "reduced_object"
       version     = "v1"
       validations = {}
       subItem = {
@@ -191,7 +168,7 @@ run "can_have_absent_bool_field_with_default_value" {
 
   command = plan
   module {
-    source = "./schemaValidation/object/v1/"
+    source = "./schemaValidation/reduced_object/v1"
   }
 
   variables {
