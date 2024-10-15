@@ -12,10 +12,13 @@ run "check_can_validate_bool_v0" {
     manifest      = true
 
     schema = {
-      type        = "bool"
-      version     = "v0"
-      subItem     = null
-      validations = {}
+      type    = "bool"
+      version = "v0"
+      subItem = null
+      validations = {
+        default_value     = null
+        has_default_value = false
+      }
     }
   }
 
@@ -40,10 +43,13 @@ run "check_can_validate_bool_v1" {
     manifest      = true
 
     schema = {
-      type        = "bool"
-      version     = "v1"
-      subItem     = null
-      validations = {}
+      type    = "bool"
+      version = "v1"
+      subItem = null
+      validations = {
+        default_value     = null
+        has_default_value = false
+      }
     }
   }
 
