@@ -1,7 +1,7 @@
 run "missing_value" {
   command = plan
   module {
-    source = "./schemaValidation/integer/v0/"
+    source = "./schemaProcessor/integer/v0/validator/"
   }
 
   variables {
@@ -28,7 +28,7 @@ run "missing_value" {
 run "with_invalid_value" {
   command = plan
   module {
-    source = "./schemaValidation/integer/v0/"
+    source = "./schemaProcessor/integer/v0/validator/"
   }
 
   variables {
@@ -55,7 +55,7 @@ run "with_invalid_value" {
 run "with_wrong_minLegnth" {
   command = plan
   module {
-    source = "./schemaValidation/integer/v0/"
+    source = "./schemaProcessor/integer/v0/validator/"
   }
 
   variables {
@@ -82,7 +82,7 @@ run "with_wrong_minLegnth" {
 run "with_wrong_maxLegnth" {
   command = plan
   module {
-    source = "./schemaValidation/integer/v0/"
+    source = "./schemaProcessor/integer/v0/validator/"
   }
 
   variables {
@@ -110,7 +110,7 @@ run "with_wrong_maxLegnth" {
 run "with_valid_value" {
   command = plan
   module {
-    source = "./schemaValidation/integer/v0/"
+    source = "./schemaProcessor/integer/v0/validator/"
   }
 
   variables {
