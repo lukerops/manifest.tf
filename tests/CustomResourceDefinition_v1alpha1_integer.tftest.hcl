@@ -1,7 +1,7 @@
 run "without_minimum_and_maximum" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/integer"
+    source = "./schemaProcessor/integer/v0/processor"
   }
 
   variables {
@@ -30,7 +30,7 @@ run "without_minimum_and_maximum" {
 run "with_minimum" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/integer"
+    source = "./schemaProcessor/integer/v0/processor"
   }
 
   variables {
@@ -60,7 +60,8 @@ run "with_minimum" {
 run "with_minimum_and_maximum" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/integer"
+
+    source = "./schemaProcessor/integer/v0/processor"
   }
 
   variables {
@@ -91,7 +92,7 @@ run "with_minimum_and_maximum" {
 run "with_invalid_minimum_and_maximum" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/integer"
+    source = "./schemaProcessor/integer/v0/processor"
   }
 
   variables {
@@ -113,7 +114,7 @@ run "with_invalid_minimum_and_maximum" {
 run "with_string_minimum" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/integer"
+    source = "./schemaProcessor/integer/v0/processor"
   }
 
   variables {
@@ -134,7 +135,7 @@ run "with_string_minimum" {
 run "with_string_maximum" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha1/integer"
+    source = "./schemaProcessor/integer/v0/processor"
   }
 
   variables {

@@ -9,7 +9,7 @@ module "string" {
 }
 
 module "integer" {
-  source = "../integer"
+  source = "../../../schemaProcessor/integer/v0/processor"
   count  = try(var.manifest.items.type == "integer", false) ? 1 : 0
 
   metadata_name = var.metadata_name
