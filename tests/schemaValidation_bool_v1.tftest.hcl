@@ -219,3 +219,66 @@ run "without_field_value_with_defaut_value_true" {
   }
 }
 
+run "with_default_value_incompatible_with_type_bool" {
+
+  command = plan
+  module {
+    source = "./schemaValidation/bool/v1/"
+  }
+
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type    = "bool"
+      version = "v1"
+      subItem = null
+      validations = {
+        default_value     = 42
+        has_default_value = true
+      }
+    }
+    manifest = null
+  }
+
+
+  expect_failures = [
+    output.resource
+  ]
+
+}
+
+run "with_default_value_incompatible_with_type_bool_manifest_with_valid_value" {
+  # Mesmo que o manifesto tenha um valor válido para o campo 
+  # não podemos permitir que o CRD tenha um default value incompatível
+
+  command = plan
+  module {
+    source = "./schemaValidation/bool/v1/"
+  }
+
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type    = "bool"
+      version = "v1"
+      subItem = null
+      validations = {
+        default_value     = 42
+        has_default_value = true
+      }
+    }
+    manifest = true
+  }
+
+
+  expect_failures = [
+    output.resource
+  ]
+
+}
