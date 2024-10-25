@@ -72,7 +72,7 @@ run "without_default_value" {
     manifest = {
       type = "bool"
     }
-  }
+ }
 
   assert {
     condition = output.schema == {
@@ -86,4 +86,25 @@ run "without_default_value" {
     }
     error_message = "Error when parsing bool field without default value"
   }
+}
+
+run "with_null_default_value" {
+  command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha2/bool"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.versions[0].specSchema.test"
+    manifest = {
+      type = "bool"
+      default = null
+    }
+  }
+
+  expect_failures = [
+      output.schema
+  ]
 }
