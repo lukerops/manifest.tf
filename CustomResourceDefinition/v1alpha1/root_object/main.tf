@@ -23,7 +23,7 @@ module "integer" {
 }
 
 module "bool" {
-  source   = "../bool"
+  source   = "../../../schemaProcessor/bool/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "bool"])
 
   metadata_name = var.metadata_name
