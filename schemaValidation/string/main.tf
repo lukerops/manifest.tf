@@ -1,5 +1,5 @@
 module "v0" {
-  source = "./v0"
+  source = "../../schemaProcessor/string/v0/validator/"
   count  = var.schema.version == "v0" ? 1 : 0
 
   metadata_name = var.metadata_name
