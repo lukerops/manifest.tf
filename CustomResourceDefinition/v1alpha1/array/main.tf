@@ -1,5 +1,5 @@
 module "string" {
-  source = "../string"
+  source = "../../../schemaProcessor/string/v0/processor"
   count  = try(var.manifest.items.type == "string", false) ? 1 : 0
 
   metadata_name = var.metadata_name
@@ -9,7 +9,7 @@ module "string" {
 }
 
 module "integer" {
-  source = "../integer"
+  source = "../../../schemaProcessor/integer/v0/processor"
   count  = try(var.manifest.items.type == "integer", false) ? 1 : 0
 
   metadata_name = var.metadata_name
@@ -19,8 +19,9 @@ module "integer" {
 }
 
 module "bool" {
-  source = "../bool"
-  count  = try(var.manifest.items.type == "bool", false) ? 1 : 0
+  source = "../../../schemaProcessor/bool/v0/processor"
+
+  count = try(var.manifest.items.type == "bool", false) ? 1 : 0
 
   metadata_name = var.metadata_name
   path          = var.path

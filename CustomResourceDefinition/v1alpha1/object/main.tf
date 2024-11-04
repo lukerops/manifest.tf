@@ -3,7 +3,7 @@ locals {
 }
 
 module "string" {
-  source   = "../string"
+  source   = "../../../schemaProcessor/string/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "string"])
 
   metadata_name = var.metadata_name
@@ -13,7 +13,7 @@ module "string" {
 }
 
 module "integer" {
-  source   = "../integer"
+  source   = "../../../schemaProcessor/integer/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "integer"])
 
   metadata_name = var.metadata_name
@@ -23,7 +23,7 @@ module "integer" {
 }
 
 module "bool" {
-  source   = "../bool"
+  source   = "../../../schemaProcessor/bool/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "bool"])
 
   metadata_name = var.metadata_name
