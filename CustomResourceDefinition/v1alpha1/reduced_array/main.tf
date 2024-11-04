@@ -19,7 +19,7 @@ module "integer" {
 }
 
 module "bool" {
-  source = "../bool"
+  source = "../../../schemaProcessor/bool/v0/processor"
   count  = try(var.manifest.items.type == "bool", false) ? 1 : 0
 
   metadata_name = var.metadata_name
