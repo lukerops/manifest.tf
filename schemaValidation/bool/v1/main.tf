@@ -10,17 +10,6 @@ locals {
 
 }
 
-
-output "debug" {
-  value = {
-    default_value       = local.default_value
-    has_default_value   = local.has_default_value
-    has_valid_value     = local.has_valid_value
-    final_default_value = local.final_default_value
-  }
-}
-
-
 output "resource" {
   value = local.has_valid_value ? tobool(var.manifest) : local.final_default_value
 
