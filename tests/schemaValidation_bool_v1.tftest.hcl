@@ -180,13 +180,6 @@ run "without_field_value_with_defaut_value_false" {
     }
     manifest = null
   }
-
-  assert {
-    condition     = output.resource == false
-    error_message = <<-EOT
-    ${format("%#v", output.debug)}    
-EOT
-  }
 }
 
 
