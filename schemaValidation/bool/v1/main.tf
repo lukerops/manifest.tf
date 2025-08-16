@@ -14,7 +14,6 @@ output "resource" {
   value = local.has_valid_value ? tobool(var.manifest) : local.final_default_value
 
   precondition {
-    #condition     = local.has_default_value || var.manifest != null
     condition = !(
       !local.has_default_value && var.manifest == null
     )
