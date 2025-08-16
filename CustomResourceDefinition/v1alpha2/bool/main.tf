@@ -15,13 +15,13 @@ output "schema" {
   }
 
   precondition {
-    condition     = !(
+    condition = !(
       local.declared_default_field && try(var.manifest.default, null) == null
-  )
+    )
     error_message = <<-EOT
     Invalid Manifest!
-    O valor default de um campo bool não pode ser null;
-    O campo ${var.field_path} tem seu default value definido como null.
+    The default defor a bool field can't be null;
+    The filed ${var.field_path} has it's default value set to null.
     (metadata: ${var.metadata_name}; path: ${var.path}; )
 EOT
   }
