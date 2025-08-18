@@ -1,20 +1,14 @@
 locals {
   has_default_value = var.schema.validations.has_default_value
-
-  default_value       = tobool(var.schema.validations.default_value)
-  final_default_value = local.default_value
-
-  has_valid_value = var.manifest != null && can(tobool(var.manifest))
-
-
 }
 
 output "resource" {
-  value = local.has_valid_value ? tobool(var.manifest) : local.final_default_value
+  value = var.manifest != null ? tobool(var.manifest) : var.schema.validations.default_value
 
   precondition {
     condition = !(
-      !local.has_default_value && var.manifest == null
+      !local.has_default_value
+      && var.manifest == null
     )
     error_message = <<-EOT
       Invalid resource manifest!
