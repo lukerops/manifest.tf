@@ -72,7 +72,7 @@ run "without_default_value" {
     manifest = {
       type = "bool"
     }
- }
+  }
 
   assert {
     condition = output.schema == {
@@ -99,12 +99,39 @@ run "with_null_default_value" {
     path          = "."
     field_path    = "spec.versions[0].specSchema.test"
     manifest = {
-      type = "bool"
+      type    = "bool"
       default = null
     }
   }
 
   expect_failures = [
-      output.schema
+    output.schema
   ]
 }
+
+run "with_default_value_incompatible_with_type_bool" {
+
+  command = plan
+  module {
+    source = "./CustomResourceDefinition/v1alpha2/bool"
+  }
+
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    manifest = {
+      type    = "bool"
+      default = 42
+    }
+  }
+
+
+  expect_failures = [
+    output.schema
+  ]
+
+}
+
+

@@ -1,11 +1,10 @@
 locals {
-  has_default_value            = var.schema.validations.has_default_value
-  has_compatible_default_value = can(tobool(var.schema.validations.default_value))
+  has_default_value = var.schema.validations.has_default_value
 
-  default_value = local.has_compatible_default_value ? tobool(var.schema.validations.default_value) : false
+  default_value       = tobool(var.schema.validations.default_value)
+  final_default_value = local.default_value
 
-  has_valid_value     = var.manifest != null && can(tobool(var.manifest))
-  final_default_value = local.has_compatible_default_value ? local.default_value : try(tobool(var.manifest), null)
+  has_valid_value = var.manifest != null && can(tobool(var.manifest))
 
 
 }
@@ -19,7 +18,7 @@ output "resource" {
     )
     error_message = <<-EOT
       Invalid resource manifest!
-      The property "${var.field_path}" can not be null.
+      The property "${var.field_path}" can not be null and have no default value.
       (metadata.name: "${var.metadata_name}"; path: "${var.path}")
     EOT
   }
@@ -33,13 +32,5 @@ output "resource" {
     EOT
   }
 
-  precondition {
-    condition     = local.has_compatible_default_value
-    error_message = <<-EOT
-      Invalid resource manifest!
-      The default value of the property "${var.field_path}" must be compatible with type bool.
-      Current default value: ${format("%v", var.schema.validations.default_value)}
-      (metadata.name: "${var.metadata_name}"; path: "${var.path}")
-    EOT
-  }
+
 }
