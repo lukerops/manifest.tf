@@ -21,8 +21,8 @@ output "schema" {
     )
     error_message = <<-EOT
     Invalid Manifest!
-    The default value a bool field can't be null;
-    The filed ${var.field_path} has it's default value set to null.
+    The default value of a bool field can't be null;
+    The field "${var.field_path} has it's default value set to null.
     (metadata: ${var.metadata_name}; path: ${var.path}; )
 EOT
   }
