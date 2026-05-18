@@ -7,7 +7,7 @@ locals {
 }
 
 module "string" {
-  source   = "../../string"
+  source   = "../../../../schemaValidation/string"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "string" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
@@ -18,7 +18,7 @@ module "string" {
 }
 
 module "integer" {
-  source   = "../../integer"
+  source   = "../../../../schemaValidation/integer"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "integer" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
@@ -29,7 +29,7 @@ module "integer" {
 }
 
 module "bool" {
-  source   = "../../bool"
+  source   = "../../../../schemaValidation/bool"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "bool" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
@@ -40,7 +40,7 @@ module "bool" {
 }
 
 module "reduced_array" {
-  source   = "../../reduced_array"
+  source   = "../../../../schemaValidation/reduced_array"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "reduced_array" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
