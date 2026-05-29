@@ -1,5 +1,5 @@
 module "root_object" {
-  source = "../root_object"
+  source = "../../../schemaProcessor/root_object/v0/processor"
   count  = can(var.manifest.specSchema) ? 1 : 0
 
   metadata_name = var.metadata_name
