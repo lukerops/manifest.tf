@@ -1,7 +1,7 @@
 run "missing_value" {
   command = plan
   module {
-    source = "./schemaValidation/object/v0/"
+    source = "./schemaProcessor/object/v0/validator/"
   }
 
   variables {
@@ -35,7 +35,7 @@ run "missing_value" {
 run "with_invalid_value" {
   command = plan
   module {
-    source = "./schemaValidation/object/v0/"
+    source = "./schemaProcessor/object/v0/validator/"
   }
 
   variables {
@@ -69,7 +69,7 @@ run "with_invalid_value" {
 run "with_valid_value" {
   command = plan
   module {
-    source = "./schemaValidation/object/v0/"
+    source = "./schemaProcessor/object/v0/validator/"
   }
 
   variables {

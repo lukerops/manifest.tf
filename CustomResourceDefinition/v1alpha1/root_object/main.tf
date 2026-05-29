@@ -43,7 +43,7 @@ module "array" {
 }
 
 module "object" {
-  source   = "../object"
+  source   = "../../../schemaProcessor/object/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "object"])
 
   metadata_name = var.metadata_name
