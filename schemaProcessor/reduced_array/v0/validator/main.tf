@@ -5,7 +5,7 @@ locals {
 }
 
 module "string" {
-  source = "../../string/"
+  source = "../../../../schemaValidation/string/"
   count  = var.schema.subItem.type == "string" ? local.manifestLength : 0
 
   metadata_name = var.metadata_name
@@ -16,7 +16,7 @@ module "string" {
 }
 
 module "bool" {
-  source = "../../bool/"
+  source = "../../../../schemaValidation/bool/"
   count  = var.schema.subItem.type == "bool" ? local.manifestLength : 0
 
   metadata_name = var.metadata_name
@@ -27,7 +27,7 @@ module "bool" {
 }
 
 module "integer" {
-  source = "../../integer/"
+  source = "../../../../schemaValidation/integer/"
   count  = var.schema.subItem.type == "integer" ? local.manifestLength : 0
 
   metadata_name = var.metadata_name

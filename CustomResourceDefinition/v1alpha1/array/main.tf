@@ -30,7 +30,7 @@ module "bool" {
 }
 
 module "reduced_object" {
-  source = "../reduced_object/"
+  source = "../../../schemaProcessor/reduced_object/v0/processor"
   count  = try(var.manifest.items.type == "object", false) ? 1 : 0
 
   metadata_name = var.metadata_name
