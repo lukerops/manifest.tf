@@ -33,7 +33,7 @@ module "bool" {
 }
 
 module "array" {
-  source   = "../array"
+  source   = "../../../schemaProcessor/array/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "array"])
 
   metadata_name = var.metadata_name
