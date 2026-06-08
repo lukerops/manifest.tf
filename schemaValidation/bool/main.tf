@@ -10,7 +10,7 @@ module "v0" {
 }
 
 module "v1" {
-  source = "./v1"
+  source = "../../schemaProcessor/bool/v1/validator/"
   count  = var.schema.version == "v1" ? 1 : 0
 
   metadata_name = var.metadata_name

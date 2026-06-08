@@ -1,7 +1,7 @@
 run "without_field_value_whithout_default_value" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
   variables {
@@ -33,7 +33,7 @@ run "without_field_value_whithout_default_value" {
 run "with_invalid_value" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
   variables {
@@ -67,7 +67,7 @@ run "with_invalid_value" {
 run "with_invalid_value_with_default_value" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
   variables {
@@ -99,7 +99,7 @@ run "with_invalid_value_with_default_value" {
 run "with_valid_value_without_default_value" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
   variables {
@@ -127,7 +127,7 @@ run "with_valid_value_without_default_value" {
 run "with_valid_value_with_default_value" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
   variables {
@@ -161,7 +161,7 @@ EOT
 run "without_field_value_with_defaut_value_false" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
 
@@ -186,7 +186,7 @@ run "without_field_value_with_defaut_value_false" {
 run "without_field_value_with_defaut_value_true" {
   command = plan
   module {
-    source = "./schemaValidation/bool/v1/"
+    source = "./schemaProcessor/bool/v1/validator/"
   }
 
 

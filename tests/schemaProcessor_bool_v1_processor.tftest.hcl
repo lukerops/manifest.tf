@@ -1,7 +1,7 @@
 run "with_default_false" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha2/bool"
+    source = "./schemaProcessor/bool/v1/processor"
   }
 
   variables {
@@ -32,7 +32,7 @@ run "with_default_false" {
 run "with_default_true" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha2/bool"
+    source = "./schemaProcessor/bool/v1/processor"
   }
 
   variables {
@@ -62,7 +62,7 @@ run "with_default_true" {
 run "without_default_value" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha2/bool"
+    source = "./schemaProcessor/bool/v1/processor"
   }
 
   variables {
@@ -91,7 +91,7 @@ run "without_default_value" {
 run "with_null_default_value" {
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha2/bool"
+    source = "./schemaProcessor/bool/v1/processor"
   }
 
   variables {
@@ -113,7 +113,7 @@ run "with_default_value_incompatible_with_type_bool" {
 
   command = plan
   module {
-    source = "./CustomResourceDefinition/v1alpha2/bool"
+    source = "./schemaProcessor/bool/v1/processor"
   }
 
 
