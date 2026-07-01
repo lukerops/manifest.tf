@@ -1,5 +1,5 @@
 module "string" {
-  source = "../string"
+  source = "../../../schemaProcessor/string/v0/processor"
   count  = try(var.manifest.items.type == "string", false) ? 1 : 0
 
   metadata_name = var.metadata_name
