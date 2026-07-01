@@ -3,7 +3,7 @@ locals {
 }
 
 module "string" {
-  source   = "../../../schemaProcessor/string/v0/processor"
+  source   = "../../../string/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "string"])
 
   metadata_name = var.metadata_name
@@ -13,7 +13,7 @@ module "string" {
 }
 
 module "integer" {
-  source   = "../../../schemaProcessor/integer/v0/processor"
+  source   = "../../../integer/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "integer"])
 
   metadata_name = var.metadata_name
@@ -23,7 +23,7 @@ module "integer" {
 }
 
 module "bool" {
-  source   = "../../../schemaProcessor/bool/v0/processor"
+  source   = "../../../bool/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "bool"])
 
   metadata_name = var.metadata_name
@@ -33,7 +33,7 @@ module "bool" {
 }
 
 module "array" {
-  source   = "../../../schemaProcessor/array/v0/processor"
+  source   = "../../../array/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "array"])
 
   metadata_name = var.metadata_name
@@ -43,7 +43,7 @@ module "array" {
 }
 
 module "reduced_object" {
-  source   = "../../../schemaProcessor/reduced_object/v0/processor"
+  source   = "../../../reduced_object/v0/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "object"])
 
   metadata_name = var.metadata_name
