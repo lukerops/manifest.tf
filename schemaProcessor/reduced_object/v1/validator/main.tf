@@ -1,47 +1,37 @@
 locals {
-  types_with_default_value_support = ["bool"]
-
-
   properties = keys(var.schema.subItem)
   missing_properties = [
     for property in local.properties : property
     if !can(var.manifest[property])
-    && !contains(
-      local.types_with_default_value_support,
-      var.schema.subItem[property].type
-    )
+    && !try(var.schema.subItem[property].validations.has_default_value, false)
   ]
 }
 
 module "string" {
-  source   = "../../string"
+  source   = "../../../../schemaValidation/string"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "string" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
   path          = var.path
   field_path    = "${var.field_path}.${each.key}"
-  manifest      = var.manifest[each.key]
+  manifest      = try(var.manifest[each.key], null)
   schema        = each.value
 }
 
 module "integer" {
-  source   = "../../integer"
+  source   = "../../../../schemaValidation/integer"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "integer" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
   path          = var.path
   field_path    = "${var.field_path}.${each.key}"
-  manifest      = var.manifest[each.key]
+  manifest      = try(var.manifest[each.key], null)
   schema        = each.value
 }
 
 module "bool" {
-  source = "../../bool"
-  for_each = {
-    for k, v in var.schema.subItem :
-    k => v
-    if v.type == "bool"
-  }
+  source   = "../../../../schemaValidation/bool"
+  for_each = { for k, v in var.schema.subItem : k => v if v.type == "bool" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
   path          = var.path
@@ -51,13 +41,13 @@ module "bool" {
 }
 
 module "reduced_array" {
-  source   = "../../reduced_array"
+  source   = "../../../../schemaValidation/reduced_array"
   for_each = { for k, v in var.schema.subItem : k => v if v.type == "reduced_array" && !contains(local.missing_properties, k) }
 
   metadata_name = var.metadata_name
   path          = var.path
   field_path    = "${var.field_path}.${each.key}"
-  manifest      = var.manifest[each.key]
+  manifest      = try(var.manifest[each.key], null)
   schema        = each.value
 }
 
