@@ -9,9 +9,9 @@ module "v0" {
   schema        = var.schema
 }
 
-module "v1" {
-  source = "../../schemaProcessor/reduced_array/v1/validator/"
-  count  = var.schema.version == "v1" ? 1 : 0
+module "v2" {
+  source = "../../schemaProcessor/reduced_array/v2/validator/"
+  count  = var.schema.version == "v2" ? 1 : 0
 
   metadata_name = var.metadata_name
   path          = var.path
@@ -24,7 +24,7 @@ output "resource" {
   value = one(
     concat(
       module.v0[*].resource,
-      module.v1[*].resource,
+      module.v2[*].resource,
     )
   )
 }

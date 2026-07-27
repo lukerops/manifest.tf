@@ -1,7 +1,7 @@
 run "without_field_value_without_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -10,7 +10,7 @@ run "without_field_value_without_default_value" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "string"
         version = "v1"
@@ -40,7 +40,7 @@ run "without_field_value_without_default_value" {
 run "with_invalid_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -49,7 +49,7 @@ run "with_invalid_value" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "string"
         version = "v1"
@@ -79,7 +79,7 @@ run "with_invalid_value" {
 run "with_invalid_value_with_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -88,7 +88,7 @@ run "with_invalid_value_with_default_value" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "string"
         version = "v1"
@@ -118,7 +118,7 @@ run "with_invalid_value_with_default_value" {
 run "with_wrong_minItems" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -127,7 +127,7 @@ run "with_wrong_minItems" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "string"
         version = "v1"
@@ -157,7 +157,7 @@ run "with_wrong_minItems" {
 run "with_wrong_maxItems" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -166,7 +166,7 @@ run "with_wrong_maxItems" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "string"
         version = "v1"
@@ -196,7 +196,7 @@ run "with_wrong_maxItems" {
 run "with_valid_value_without_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -205,7 +205,7 @@ run "with_valid_value_without_default_value" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "integer"
         version = "v1"
@@ -236,7 +236,7 @@ run "with_valid_value_without_default_value" {
 run "with_valid_value_with_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -245,7 +245,7 @@ run "with_valid_value_with_default_value" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "bool"
         version = "v1"
@@ -274,7 +274,7 @@ run "with_valid_value_with_default_value" {
 run "without_field_value_with_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -283,7 +283,7 @@ run "without_field_value_with_default_value" {
     field_path    = "spec.test"
     schema = {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "bool"
         version = "v1"

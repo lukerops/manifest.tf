@@ -36,7 +36,7 @@ module "bool" {
 output "schema" {
   value = {
     type    = "reduced_array"
-    version = "v1"
+    version = "v2"
     subItem = one(flatten([module.string[*].schema, module.integer[*].schema, module.bool[*].schema]))
     validations = {
       minItems          = try(tonumber(var.manifest.minItems), null)

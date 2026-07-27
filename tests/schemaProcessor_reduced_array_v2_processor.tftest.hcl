@@ -1,7 +1,7 @@
 run "without_items" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -21,7 +21,7 @@ run "without_items" {
 run "without_default_value_and_with_bool_items" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -39,7 +39,7 @@ run "without_default_value_and_with_bool_items" {
   assert {
     condition = output.schema == {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "bool"
         version = "v1"
@@ -63,7 +63,7 @@ run "without_default_value_and_with_bool_items" {
 run "with_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -82,7 +82,7 @@ run "with_default_value" {
   assert {
     condition = output.schema == {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "bool"
         version = "v1"
@@ -106,7 +106,7 @@ run "with_default_value" {
 run "with_default_value_and_constraints" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -127,7 +127,7 @@ run "with_default_value_and_constraints" {
   assert {
     condition = output.schema == {
       type    = "reduced_array"
-      version = "v1"
+      version = "v2"
       subItem = {
         type    = "integer"
         version = "v1"
@@ -153,7 +153,7 @@ run "with_default_value_and_constraints" {
 run "with_null_default_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -177,7 +177,7 @@ run "with_null_default_value" {
 run "with_default_value_incompatible_with_type_array" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -201,7 +201,7 @@ run "with_default_value_incompatible_with_type_array" {
 run "with_invalid_minItems_and_maxItems" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -226,7 +226,7 @@ run "with_invalid_minItems_and_maxItems" {
 run "with_invalid_items_type" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {

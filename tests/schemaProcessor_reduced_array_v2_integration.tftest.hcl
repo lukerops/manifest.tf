@@ -1,7 +1,7 @@
 run "required_field_with_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -20,7 +20,7 @@ run "required_field_with_value" {
 run "required_field_manifest_provides_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -40,7 +40,7 @@ run "required_field_manifest_provides_value" {
 run "required_field_manifest_missing_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -59,7 +59,7 @@ run "required_field_manifest_missing_value" {
 run "optional_field_with_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/processor"
+    source = "./schemaProcessor/reduced_array/v2/processor"
   }
 
   variables {
@@ -79,7 +79,7 @@ run "optional_field_with_default" {
 run "optional_field_manifest_missing_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -99,7 +99,7 @@ run "optional_field_manifest_missing_uses_default" {
 run "optional_field_manifest_overrides_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
@@ -119,7 +119,7 @@ run "optional_field_manifest_overrides_default" {
 run "optional_field_invalid_value_does_not_fall_back_to_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_array/v1/validator/"
+    source = "./schemaProcessor/reduced_array/v2/validator/"
   }
 
   variables {
