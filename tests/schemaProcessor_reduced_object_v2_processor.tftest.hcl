@@ -1,7 +1,7 @@
 run "without_properties" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -21,7 +21,7 @@ run "without_properties" {
 run "with_invalid_properties" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -42,7 +42,7 @@ run "with_invalid_properties" {
 run "with_properties_missing_type" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -65,7 +65,7 @@ run "with_properties_missing_type" {
 run "with_properties_invalid_type" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -90,7 +90,7 @@ run "with_properties_invalid_type" {
 run "with_properties_without_default_values" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -122,7 +122,7 @@ run "with_properties_without_default_values" {
   assert {
     condition = output.schema == {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         boolProperty = {
@@ -158,7 +158,7 @@ run "with_properties_without_default_values" {
         }
         arrayProperty = {
           type    = "reduced_array"
-          version = "v1"
+          version = "v2"
           subItem = {
             type    = "string"
             version = "v1"
@@ -186,7 +186,7 @@ run "with_properties_without_default_values" {
 run "with_properties_with_default_values" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -215,7 +215,7 @@ run "with_properties_with_default_values" {
   assert {
     condition = output.schema == {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         boolProperty = {

@@ -33,7 +33,7 @@ module "bool" {
 }
 
 module "reduced_array" {
-  source   = "../../../reduced_array/v1/processor"
+  source   = "../../../reduced_array/v2/processor"
   for_each = toset([for key, value in local.properties : key if try(value.type, null) == "array"])
 
   metadata_name = var.metadata_name
@@ -45,7 +45,7 @@ module "reduced_array" {
 output "schema" {
   value = {
     type        = "reduced_object"
-    version     = "v1"
+    version     = "v2"
     validations = {}
     subItem = {
       for key, value in merge(module.string, module.integer, module.bool, module.reduced_array) : key => value.schema

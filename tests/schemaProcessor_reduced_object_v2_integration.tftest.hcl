@@ -1,7 +1,7 @@
 run "required_property_with_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -22,7 +22,7 @@ run "required_property_with_value" {
 run "required_property_manifest_provides_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -44,7 +44,7 @@ run "required_property_manifest_provides_value" {
 run "required_property_manifest_missing_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -63,7 +63,7 @@ run "required_property_manifest_missing_value" {
 run "optional_property_with_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/processor"
+    source = "./schemaProcessor/reduced_object/v2/processor"
   }
 
   variables {
@@ -85,7 +85,7 @@ run "optional_property_with_default" {
 run "optional_property_manifest_missing_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -105,7 +105,7 @@ run "optional_property_manifest_missing_uses_default" {
 run "optional_property_manifest_overrides_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {

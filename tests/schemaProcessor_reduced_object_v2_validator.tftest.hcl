@@ -1,7 +1,7 @@
 run "missing_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -10,7 +10,7 @@ run "missing_value" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         stringProperty = {
@@ -37,7 +37,7 @@ run "missing_value" {
 run "with_invalid_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -46,7 +46,7 @@ run "with_invalid_value" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         stringProperty = {
@@ -73,7 +73,7 @@ run "with_invalid_value" {
 run "with_missing_required_property" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -82,7 +82,7 @@ run "with_missing_required_property" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         stringProperty = {
@@ -109,7 +109,7 @@ run "with_missing_required_property" {
 run "with_valid_value" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -118,7 +118,7 @@ run "with_valid_value" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         stringProperty = {
@@ -174,7 +174,7 @@ run "with_valid_value" {
 run "with_missing_bool_property_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -183,7 +183,7 @@ run "with_missing_bool_property_uses_default" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         active = {
@@ -209,7 +209,7 @@ run "with_missing_bool_property_uses_default" {
 run "with_null_bool_property_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -218,7 +218,7 @@ run "with_null_bool_property_uses_default" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         active = {
@@ -246,7 +246,7 @@ run "with_null_bool_property_uses_default" {
 run "with_missing_string_property_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -255,7 +255,7 @@ run "with_missing_string_property_uses_default" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         name = {
@@ -283,7 +283,7 @@ run "with_missing_string_property_uses_default" {
 run "with_missing_integer_property_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -292,7 +292,7 @@ run "with_missing_integer_property_uses_default" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         replicas = {
@@ -320,7 +320,7 @@ run "with_missing_integer_property_uses_default" {
 run "with_missing_reduced_array_property_uses_default" {
   command = plan
   module {
-    source = "./schemaProcessor/reduced_object/v1/validator/"
+    source = "./schemaProcessor/reduced_object/v2/validator/"
   }
 
   variables {
@@ -329,12 +329,12 @@ run "with_missing_reduced_array_property_uses_default" {
     field_path    = "spec.test"
     schema = {
       type        = "reduced_object"
-      version     = "v1"
+      version     = "v2"
       validations = {}
       subItem = {
         tags = {
           type    = "reduced_array"
-          version = "v1"
+          version = "v2"
           subItem = {
             type    = "string"
             version = "v1"
