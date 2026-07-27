@@ -153,9 +153,11 @@ run "with_valid_value" {
           }
         }
         objectProperty = {
-          type        = "object"
-          version     = "v2"
-          validations = {}
+          type    = "object"
+          version = "v2"
+          validations = {
+            optional = false
+          }
           subItem = {
             stringProperty = {
               type    = "string"
@@ -283,9 +285,11 @@ run "with_missing_object_property_fails" {
       validations = {}
       subItem = {
         objectProperty = {
-          type        = "object"
-          version     = "v2"
-          validations = {}
+          type    = "object"
+          version = "v2"
+          validations = {
+            optional = false
+          }
           subItem = {
             stringProperty = {
               type    = "string"
