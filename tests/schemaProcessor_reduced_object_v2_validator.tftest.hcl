@@ -9,9 +9,11 @@ run "missing_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         stringProperty = {
           type    = "string"
@@ -45,9 +47,11 @@ run "with_invalid_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         stringProperty = {
           type    = "string"
@@ -81,9 +85,11 @@ run "with_missing_required_property" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         stringProperty = {
           type    = "string"
@@ -117,9 +123,11 @@ run "with_valid_value" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         stringProperty = {
           type    = "string"
@@ -182,9 +190,11 @@ run "with_missing_bool_property_uses_default" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         active = {
           type    = "bool"
@@ -217,9 +227,11 @@ run "with_null_bool_property_uses_default" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         active = {
           type    = "bool"
@@ -254,9 +266,11 @@ run "with_missing_string_property_uses_default" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         name = {
           type    = "string"
@@ -291,9 +305,11 @@ run "with_missing_integer_property_uses_default" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         replicas = {
           type    = "integer"
@@ -328,9 +344,11 @@ run "with_missing_reduced_array_property_uses_default" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         tags = {
           type    = "reduced_array"
@@ -362,4 +380,160 @@ run "with_missing_reduced_array_property_uses_default" {
     condition     = output.resource == { tags = ["default-tag"] }
     error_message = "Error: did not use default value for missing reduced_array property"
   }
+}
+
+run "optional_and_manifest_null_returns_null" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/validator/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = true
+      }
+      subItem = {
+        name = {
+          type    = "string"
+          version = "v1"
+          subItem = null
+          validations = {
+            minLength         = null
+            maxLength         = null
+            has_default_value = false
+            default_value     = null
+          }
+        }
+      }
+    }
+    manifest = null
+  }
+
+  assert {
+    condition     = output.resource == null
+    error_message = "Error: optional reduced_object with absent manifest should resolve to null"
+  }
+}
+
+run "not_optional_and_manifest_null_fails" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/validator/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
+      subItem = {
+        name = {
+          type    = "string"
+          version = "v1"
+          subItem = null
+          validations = {
+            minLength         = null
+            maxLength         = null
+            has_default_value = false
+            default_value     = null
+          }
+        }
+      }
+    }
+    manifest = null
+  }
+
+  expect_failures = [
+    output.resource,
+  ]
+}
+
+run "optional_and_manifest_present_validates_normally" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/validator/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = true
+      }
+      subItem = {
+        name = {
+          type    = "string"
+          version = "v1"
+          subItem = null
+          validations = {
+            minLength         = null
+            maxLength         = null
+            has_default_value = false
+            default_value     = null
+          }
+        }
+      }
+    }
+    manifest = {
+      name = "hello"
+    }
+  }
+
+  assert {
+    condition     = output.resource == { name = "hello" }
+    error_message = "Error: optional reduced_object with present manifest should validate normally"
+  }
+}
+
+run "optional_and_manifest_present_but_missing_required_property_fails" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/validator/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema = {
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = true
+      }
+      subItem = {
+        name = {
+          type    = "string"
+          version = "v1"
+          subItem = null
+          validations = {
+            minLength         = null
+            maxLength         = null
+            has_default_value = false
+            default_value     = null
+          }
+        }
+      }
+    }
+    manifest = {}
+  }
+
+  expect_failures = [
+    output.resource,
+  ]
 }

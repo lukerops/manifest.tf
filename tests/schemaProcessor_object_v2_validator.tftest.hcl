@@ -153,9 +153,11 @@ run "with_valid_value" {
           }
         }
         reducedObjectProperty = {
-          type        = "reduced_object"
-          version     = "v2"
-          validations = {}
+          type    = "reduced_object"
+          version = "v2"
+          validations = {
+            optional = false
+          }
           subItem = {
             stringProperty = {
               type    = "string"

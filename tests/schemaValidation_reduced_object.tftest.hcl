@@ -125,9 +125,11 @@ run "can_parse_reduced_object_v2" {
     path          = "."
     field_path    = "spec.test"
     schema = {
-      type        = "reduced_object"
-      version     = "v2"
-      validations = {}
+      type    = "reduced_object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         stringProperty = {
           type    = "string"
