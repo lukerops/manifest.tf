@@ -1,4 +1,5 @@
 locals {
+  optional   = var.schema.validations.optional
   properties = keys(var.schema.subItem)
   missing_properties = [
     for property in local.properties : property
@@ -52,19 +53,19 @@ module "reduced_array" {
 }
 
 output "resource" {
-  value = { for k, v in merge(module.string, module.integer, module.bool, module.reduced_array) : k => v.resource }
+  value = var.manifest != null ? { for k, v in merge(module.string, module.integer, module.bool, module.reduced_array) : k => v.resource } : null
 
   precondition {
-    condition     = var.manifest != null
+    condition     = var.manifest != null || local.optional
     error_message = <<-EOT
       Invalid resource manifest!
-      The property "${var.field_path}" can not be null.
+      The property "${var.field_path}" can not be null (and is not optional).
       (metadata.name: "${var.metadata_name}"; path: "${var.path}")
     EOT
   }
 
   precondition {
-    condition     = can(keys(var.manifest))
+    condition     = var.manifest == null || can(keys(var.manifest))
     error_message = <<-EOT
       Invalid resource manifest!
       The type of the property "${var.field_path}" must be object.
@@ -73,7 +74,7 @@ output "resource" {
   }
 
   precondition {
-    condition     = length(local.missing_properties) == 0
+    condition     = var.manifest == null || length(local.missing_properties) == 0
     error_message = <<-EOT
       Invalid resource manifest!
       The field "${var.field_path}" is missing the following properties: ${join(", ", local.missing_properties)}.

@@ -123,3 +123,67 @@ run "optional_property_manifest_overrides_default" {
     error_message = "Error: replaced provided value with default"
   }
 }
+
+run "optional_object_with_manifest_present" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/processor"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    manifest = {
+      type     = "object"
+      optional = true
+      properties = {
+        name = {
+          type = "string"
+        }
+      }
+    }
+  }
+}
+
+run "optional_object_manifest_absent_resolves_to_null" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/validator/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema        = run.optional_object_with_manifest_present.schema
+    manifest      = null
+  }
+
+  assert {
+    condition     = output.resource == null
+    error_message = "Error: optional object with absent manifest should resolve to null"
+  }
+}
+
+run "optional_object_manifest_present_validates_normally" {
+  command = plan
+  module {
+    source = "./schemaProcessor/reduced_object/v2/validator/"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.test"
+    schema        = run.optional_object_with_manifest_present.schema
+    manifest = {
+      name = "hello"
+    }
+  }
+
+  assert {
+    condition     = output.resource == { name = "hello" }
+    error_message = "Error: optional object with present manifest should validate normally"
+  }
+}

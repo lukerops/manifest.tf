@@ -207,9 +207,11 @@ run "with_valid_value_without_default_value" {
       type    = "array"
       version = "v2"
       subItem = {
-        type        = "reduced_object"
-        version     = "v2"
-        validations = {}
+        type    = "reduced_object"
+        version = "v2"
+        validations = {
+          optional = false
+        }
         subItem = {
           integerProperty = {
             type    = "integer"
