@@ -190,9 +190,11 @@ run "with_properties_without_default_values" {
           }
         }
         objectProperty = {
-          type        = "object"
-          version     = "v2"
-          validations = {}
+          type    = "object"
+          version = "v2"
+          validations = {
+            optional = false
+          }
           subItem = {
             stringProperty = {
               type    = "string"

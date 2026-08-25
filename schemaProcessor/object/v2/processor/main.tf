@@ -1,5 +1,7 @@
 locals {
-  properties = try({ for key, value in var.manifest.properties : key => value }, {})
+  properties                    = try({ for key, value in var.manifest.properties : key => value }, {})
+  declared_optional_field       = contains(keys(var.manifest), "optional")
+  has_compatible_optional_value = can(tobool(try(var.manifest.optional, false)))
 }
 
 module "string" {
@@ -54,9 +56,11 @@ module "reduced_object" {
 
 output "schema" {
   value = {
-    type        = "object"
-    version     = "v2"
-    validations = {}
+    type    = "object"
+    version = "v2"
+    validations = {
+      optional = try(tobool(var.manifest.optional), false)
+    }
     subItem = {
       for key, value in merge(module.string, module.integer, module.bool, module.array, module.reduced_object) : key => value.schema
     }
@@ -98,6 +102,24 @@ output "schema" {
       Invalid propertie "type".
       The field "${var.field_path}.properties.*.type" must be one of "string", "integer", "bool", "array" or "object".
       (metadata.name: "${var.metadata_name}", path: "${var.path}")
+    EOT
+  }
+
+  precondition {
+    condition     = local.has_compatible_optional_value
+    error_message = <<-EOT
+      Invalid "optional" value.
+      The field "${var.field_path}.optional" must be a bool.
+      (metadata.name: "${var.metadata_name}", path: "${var.path}")
+    EOT
+  }
+
+  precondition {
+    condition     = !(local.declared_optional_field && try(tobool(var.manifest.optional), false) && contains(keys(var.manifest), "default"))
+    error_message = <<-EOT
+      Invalid Manifest!
+      The field "${var.field_path}" can't have both "optional: true" and "default" set.
+      (metadata.name: "${var.metadata_name}"; path: "${var.path}")
     EOT
   }
 }

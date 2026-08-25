@@ -133,9 +133,11 @@ run "with_properties_without_default_values" {
 
   assert {
     condition = output.schema == {
-      type        = "object"
-      version     = "v2"
-      validations = {}
+      type    = "object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         boolProperty = {
           type    = "bool"
@@ -253,9 +255,11 @@ run "with_properties_with_default_values" {
 
   assert {
     condition = output.schema == {
-      type        = "object"
-      version     = "v2"
-      validations = {}
+      type    = "object"
+      version = "v2"
+      validations = {
+        optional = false
+      }
       subItem = {
         boolProperty = {
           type    = "bool"
@@ -311,4 +315,110 @@ run "with_properties_with_default_values" {
     }
     error_message = "Error when parsing object with properties with default values."
   }
+}
+
+run "without_optional_defaults_to_false" {
+  command = plan
+  module {
+    source = "./schemaProcessor/object/v2/processor"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.versions[0].specSchema.test"
+    manifest = {
+      type = "object"
+      properties = {
+        name = {
+          type = "string"
+        }
+      }
+    }
+  }
+
+  assert {
+    condition     = output.schema.validations.optional == false
+    error_message = "Error: optional should default to false when absent"
+  }
+}
+
+run "with_optional_true" {
+  command = plan
+  module {
+    source = "./schemaProcessor/object/v2/processor"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.versions[0].specSchema.test"
+    manifest = {
+      type     = "object"
+      optional = true
+      properties = {
+        name = {
+          type = "string"
+        }
+      }
+    }
+  }
+
+  assert {
+    condition     = output.schema.validations.optional == true
+    error_message = "Error: optional should be true when declared"
+  }
+}
+
+run "with_invalid_optional_value" {
+  command = plan
+  module {
+    source = "./schemaProcessor/object/v2/processor"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.versions[0].specSchema.test"
+    manifest = {
+      type     = "object"
+      optional = "not-a-bool"
+      properties = {
+        name = {
+          type = "string"
+        }
+      }
+    }
+  }
+
+  expect_failures = [
+    output.schema,
+  ]
+}
+
+run "with_optional_and_default_together_is_invalid" {
+  command = plan
+  module {
+    source = "./schemaProcessor/object/v2/processor"
+  }
+
+  variables {
+    metadata_name = "test"
+    path          = "."
+    field_path    = "spec.versions[0].specSchema.test"
+    manifest = {
+      type     = "object"
+      optional = true
+      default  = {}
+      properties = {
+        name = {
+          type = "string"
+        }
+      }
+    }
+  }
+
+  expect_failures = [
+    output.schema,
+  ]
 }
